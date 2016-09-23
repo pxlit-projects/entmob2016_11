@@ -27,7 +27,5 @@ De benodigdheden van de applicatie bestaan uit 2 TI Sensortags en mogelijks een 
 ![Afbeelding is momenteel niet beschikbaar](Resources/crops.jpg)
 
 ###Implementatie
-De implementatie gebeurt volgens het principe van MVVM(model - view - viewmodel).
-De frontend zal geprogrammeerd worden m.b.v. Xamarin en UWP.
-De backend wordt geprogrammeerd m.b.v. Java/Spring, gebruikmakend van een REST API en messaging.
-De server is een Ubuntu server, met als database MySQL.
+De frontend zal geprogrammeerd worden m.b.v. Xamarin en UWP. De communicatie tussen de frontend en backend gebeurt via REST API en messaging.
+De backend wordt geprogrammeerd m.b.v. Java/Spring. Via Hibernate JPA communiceert de backend met de MySQL database. Deze zal bereikbaar zijn via een tomcat server.
