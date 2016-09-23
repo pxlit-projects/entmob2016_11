@@ -19,11 +19,14 @@ De benodigdheden van de applicatie bestaan uit 2 TI Sensortags en mogelijks een 
 2. Bovengrondse sensortag
   1. Temperatuursensor
   De omgevingstemperatuur is zeer belangrijk voor de ademhaling van de plant. Door deze bij te houden, kan de applicatie een 'heatmap' maken en bepalen wanneer het de ideale temperatuur is om te planten, te besproeien, te bemesten, etc.
+
   2.Luchtvochtigheid
   Door de luchtvochtigheid bij te houden, kan de applicatie ,zoals bij de temperatuursensor, een 'humititymap' maken, hierdoor kan men bepalen wanneer het ideale moment is om activiteiten uit te voeren.
   3. Lichtsensor
   Zonlicht is zeer belangrijk voor de wortelgroei. Afhankelijk van de plant, ingegeven door de gebruiker, kan de applicatie notificaties geven indien er te weinig of te veel lichtintensiteit is. Hierbij kan de applicatie ook een 'lightmap' maken, waarbij de gebruiker kan kijken hoe de lichtintensiteit verloopt. 
+
 ![Afbeelding is momenteel niet beschikbaar](Resources/crops.jpg)
+
 ###Implementatie
 De implementatie gebeurt volgens het principe van MVVM(model - view - viewmodel).
 De frontend zal geprogrammeerd worden m.b.v. Xamarin en UWP.
