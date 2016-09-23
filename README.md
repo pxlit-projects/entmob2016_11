@@ -1,4 +1,4 @@
-#Smart garden - entmob2016_11
+﻿#Smart garden - entmob2016_11
 Enterprise and mobile project by Stef Adriaansen, Toon Froeyen, Brian Poncelet and Robin Lycops
 ##Case
 ###Beschrijving
@@ -24,3 +24,4 @@ Door de luchtvochtigheid bij te houden, kan de applicatie ,zoals bij de temperat
 ⋅⋅3. Lichtsensor
 Zonlicht is zeer belangrijk voor de wortelgroei. Afhankelijk van de plant, ingegeven door de gebruiker, kan de applicatie notificaties geven indien er te weinig of te veel lichtintensiteit is.
 Hierbij kan de applicatie ook een 'lightmap' maken, waarbij de gebruiker kan kijken hoe de lichtintensiteit verloopt. 
+![Afbeelding is momenteel niet beschikbaar](https://raw.githubusercontent.com/pxlit-projects/entmob2016_11/Resources/crops.jpg)
