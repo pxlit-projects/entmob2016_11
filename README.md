@@ -25,6 +25,7 @@ De benodigdheden van de applicatie bestaan uit 2 TI Sensortags en mogelijks een 
   Zonlicht is zeer belangrijk voor de wortelgroei. Afhankelijk van de plant, ingegeven door de gebruiker, kan de applicatie notificaties geven indien er te weinig of te veel lichtintensiteit is. Hierbij kan de applicatie ook een 'lightmap' maken, waarbij de gebruiker kan kijken hoe de lichtintensiteit verloopt. 
 
 ![Afbeelding is momenteel niet beschikbaar](Resources/crops.jpg)
+![Afbeelding is momenteel niet beschikbaar](Resources/Diagram.PNG)
 
 ###Implementatie
 De frontend zal geprogrammeerd worden m.b.v. Xamarin en UWP. De communicatie tussen de frontend en backend gebeurt via REST API en messaging.
