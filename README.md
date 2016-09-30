@@ -1,4 +1,4 @@
-﻿#Smart garden - entmob2016_11
+#Smart garden - entmob2016_11
 Enterprise and mobile project by Stef Adriaansen, Toon Froeyen, Brian Poncelet and Robin Lycops
 ##Case
 ###Beschrijving
@@ -28,6 +28,9 @@ De benodigdheden van de applicatie bestaan uit 2 TI Sensortags en mogelijks een 
 
 ###Implementatie
 De frontend zal geprogrammeerd worden m.b.v. Xamarin en UWP. De communicatie tussen de frontend en backend gebeurt via REST API en messaging.
-De backend wordt geprogrammeerd m.b.v. Java/Spring. Via Hibernate JPA communiceert de backend met de MySQL database. Deze zal bereikbaar zijn via een tomcat server.
+De backend wordt geprogrammeerd m.b.v. Java/Spring. Via Hibernate JPA communiceert de backend met de MySQL database.
+
+De Xamarin applicatie zal bestaan uit een mobile app, die via het toestel connectie maakt (m.b.v Bluetooth) en gegevens doorstuurt naar de database. In deze applicatie kan de gebruiker verschillende acties uitvoeren, die invloed hebben op de gegevens of extra gegevens kunnen opleveren.
+De UWP applicatie zal een overzicht van deze gegevens in verschillende formaten leveren. Deze gegevens kunnen dan gebruikt worden voor verdere analyse.
 
 ![Afbeelding is momenteel niet beschikbaar](Resources/Diagram.PNG)
