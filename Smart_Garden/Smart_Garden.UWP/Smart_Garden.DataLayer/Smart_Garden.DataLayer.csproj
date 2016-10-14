@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201610141453303_addDiscriminatorToUser.Designer.cs">
       <DependentUpon>201610141453303_addDiscriminatorToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610141454383_addDiscriminatorFluentAPIToUser.cs" />
+    <Compile Include="Migrations\201610141454383_addDiscriminatorFluentAPIToUser.Designer.cs">
+      <DependentUpon>201610141454383_addDiscriminatorFluentAPIToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SmartGardenContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610141453303_addDiscriminatorToUser.resx">
       <DependentUpon>201610141453303_addDiscriminatorToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610141454383_addDiscriminatorFluentAPIToUser.resx">
+      <DependentUpon>201610141454383_addDiscriminatorFluentAPIToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
