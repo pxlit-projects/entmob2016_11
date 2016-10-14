@@ -33,7 +33,8 @@ namespace Smart_Garden.SensorTag
         protected override void NotifyAboutChanges(byte[] data)
         {
             HumidityData = CalculateHumidityInPercent(data);
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("HumidityData"));
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("HumidityData"));
         }
     }
 }

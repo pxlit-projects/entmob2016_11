@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Smart_Garden.SensorTag;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
+using Windows.UI.Xaml;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -88,6 +89,15 @@ namespace Smart_Garden.UWP
                                     sensorCount++;
                                     break;
                             }
+                            if (sensorCount == 4)
+                            {
+                                await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () =>
+                                {
+                                    progress.Visibility = Visibility.Collapsed;
+                                    this.DataContext = devices;
+                                });
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -95,7 +105,6 @@ namespace Smart_Garden.UWP
 
                     }
                 });
-
         }
 
         private void DevicePage_BackRequested(object sender, BackRequestedEventArgs e)

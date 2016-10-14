@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart_Garden.UWP", "Smart_Garden.UWP\Smart_Garden.UWP.csproj", "{78A2768B-AE27-41ED-A3C4-3F412C37B210}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityFramework", "EntityFramework", "{916E8804-6A60-4CB6-AE45-8578BE696E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart_Garden.Model", "Smart_Garden.Model\Smart_Garden.Model.csproj", "{77C40037-D21D-410C-8A5B-8368BCB2090E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart_Garden.DataLayer", "Smart_Garden.DataLayer\Smart_Garden.DataLayer.csproj", "{817D68D8-4A45-4789-A8AF-76F4CF108425}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,8 +43,44 @@ Global
 		{78A2768B-AE27-41ED-A3C4-3F412C37B210}.Release|x86.ActiveCfg = Release|x86
 		{78A2768B-AE27-41ED-A3C4-3F412C37B210}.Release|x86.Build.0 = Release|x86
 		{78A2768B-AE27-41ED-A3C4-3F412C37B210}.Release|x86.Deploy.0 = Release|x86
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|x64.Build.0 = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Debug|x86.Build.0 = Debug|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|ARM.Build.0 = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|x64.ActiveCfg = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|x64.Build.0 = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|x86.ActiveCfg = Release|Any CPU
+		{77C40037-D21D-410C-8A5B-8368BCB2090E}.Release|x86.Build.0 = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|ARM.Build.0 = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|x64.Build.0 = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Debug|x86.Build.0 = Debug|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|ARM.ActiveCfg = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|ARM.Build.0 = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|x64.ActiveCfg = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|x64.Build.0 = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|x86.ActiveCfg = Release|Any CPU
+		{817D68D8-4A45-4789-A8AF-76F4CF108425}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77C40037-D21D-410C-8A5B-8368BCB2090E} = {916E8804-6A60-4CB6-AE45-8578BE696E29}
+		{817D68D8-4A45-4789-A8AF-76F4CF108425} = {916E8804-6A60-4CB6-AE45-8578BE696E29}
 	EndGlobalSection
 EndGlobal
