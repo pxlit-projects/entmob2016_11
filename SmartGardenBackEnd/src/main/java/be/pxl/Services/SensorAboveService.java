@@ -18,7 +18,7 @@ public class SensorAboveService {
     SensorAboveRepository repository;
 
     public List<SensorAbove> findSensorEntitiesBetweenDates(Date d1, Date d2){
-        return repository.findByTimeOfRecordingBetween(d1,d2);
+            return repository.findByTimeOfRecordingBetween(d1, d2);
     }
     public void CreateEntity(SensorAbove sensorAbove){
         repository.save(sensorAbove);
