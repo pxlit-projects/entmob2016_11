@@ -1,0 +1,10 @@
+UWP:
+----
+	Gatt devices (LE bluetooth)
+		https://msdn.microsoft.com/en-us/windows/uwp/devices-sensors/gatt-scenarios
+
+	Pairing bluetooth devices: 
+		https://msdn.microsoft.com/en-us/windows/uwp/devices-sensors/pair-devices
+
+	Battery information bluetooth devices:
+		https://msdn.microsoft.com/en-us/windows/uwp/devices-sensors/get-battery-info
