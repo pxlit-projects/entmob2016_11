@@ -15,40 +15,28 @@ public class User {
 
     }
 
-    public User(String username, String password, String discriminator) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.discriminator = discriminator;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
 
+    @Id
     @Column(name="username")
     private String username;
 
     @Column(name="password")
     private String password;
 
-    @Column(name="discriminator")
-    private String discriminator;
+
+    @Column(name="enabled")
+    private boolean enabled;
 
     @OneToMany(mappedBy = "user")
-    private Set<SensorAbove> sensorAboves = new HashSet<SensorAbove>();
-
-    @OneToMany(mappedBy = "user")
-    private Set<SensorBelow> sensorBelows = new HashSet<SensorBelow>();
+    private Set<SensorEntity> sensorEntities = new HashSet<SensorEntity>();
 
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -66,27 +54,20 @@ public class User {
         this.password = password;
     }
 
-    public String getDiscriminator() {
-        return discriminator;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setDiscriminator(String discriminator) {
-        this.discriminator = discriminator;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public Set<SensorAbove> getSensorAboves() {
-        return sensorAboves;
+    public Set<SensorEntity> getSensorEntities() {
+        return sensorEntities;
     }
 
-    public void setSensorAboves(Set<SensorAbove> sensorAboves) {
-        this.sensorAboves = sensorAboves;
+    public void setSensorEntities(Set<SensorEntity> sensorEntities) {
+        this.sensorEntities = sensorEntities;
     }
 
-    public Set<SensorBelow> getSensorBelows() {
-        return sensorBelows;
-    }
-
-    public void setSensorBelows(Set<SensorBelow> sensorBelows) {
-        this.sensorBelows = sensorBelows;
-    }
 }

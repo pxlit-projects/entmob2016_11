@@ -1,18 +1,18 @@
 package be.pxl.Models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Created by 11308157 on 7/10/2016.
  */
 @Entity
-@Table(name="sensorbelow")
-public class SensorBelow {
+@Table(name="sensor_entities")
+public class SensorEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,39 +28,27 @@ public class SensorBelow {
     @Column(name="light")
     private double light;
 
-    @Column(name="timeofrecording")
-    private Date timeOfRecording;
+    @Column(name="time_of_recording")
+    private LocalDateTime timeOfRecording;
+
+    @Column(name = "above")
+    private boolean above;
 
     @JsonIgnore
     @ManyToOne
     private User user;
 
-    public SensorBelow(double humidity, double temperature, double light, User user) {
+    public SensorEntity(double humidity, double temperature, double light, User user, boolean above) {
+        this();
         this.humidity = humidity;
         this.temperature = temperature;
         this.light = light;
         this.user = user;
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        try {
-            timeOfRecording = dateFormat.parse(date.toString());
-        }
-        catch(ParseException ex){
-            System.out.println("Cannot parse");
-        }
-
+        this.above = above;
     }
 
-    public SensorBelow() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        try {
-            timeOfRecording = dateFormat.parse(date.toString());
-        }
-        catch(ParseException ex){
-            System.out.println("Cannot parse");
-        }
+    public SensorEntity(){
+        this.timeOfRecording = LocalDateTime.now();
     }
 
     public int getId() {
@@ -95,11 +83,11 @@ public class SensorBelow {
         this.light = light;
     }
 
-    public Date getTimeOfRecording() {
+    public LocalDateTime getTimeOfRecording() {
         return timeOfRecording;
     }
 
-    public void setTimeOfRecording(Date timeOfRecording) {
+    public void setTimeOfRecording(LocalDateTime timeOfRecording) {
         this.timeOfRecording = timeOfRecording;
     }
 
@@ -109,5 +97,13 @@ public class SensorBelow {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isAbove() {
+        return above;
+    }
+
+    public void setAbove(boolean above) {
+        this.above = above;
     }
 }

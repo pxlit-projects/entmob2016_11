@@ -1,7 +1,7 @@
 package be.pxl.Services;
 
-import be.pxl.Models.SensorAbove;
-import be.pxl.Repositories.SensorAboveRepository;
+import be.pxl.Models.SensorEntity;
+import be.pxl.Repositories.SensorEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +12,21 @@ import java.util.List;
  * Created by 11308157 on 7/10/2016.
  */
 @Service
-public class SensorAboveService {
+public class SensorEntityService {
 
     @Autowired
-    SensorAboveRepository repository;
+    SensorEntityRepository repository;
 
-    public List<SensorAbove> findSensorEntitiesBetweenDates(Date d1, Date d2){
+    public List<SensorEntity> findSensorEntitiesBetweenDates(Date d1, Date d2){
             return repository.findByTimeOfRecordingBetween(d1, d2);
     }
-    public void CreateEntity(SensorAbove sensorAbove){
-        repository.save(sensorAbove);
+    public void CreateEntity(SensorEntity sensorEntity){
+        repository.save(sensorEntity);
     }
-    public SensorAbove getEntityById(int id){
+    public SensorEntity getEntityById(int id){
        return repository.findOne(id);
     }
-    public Iterable<SensorAbove> getAll(){
+    public Iterable<SensorEntity> getAll(){
         return repository.findAll();
     }
 
