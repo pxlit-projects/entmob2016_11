@@ -16,7 +16,7 @@ import java.util.*;
  * Created by 11402946 on 19/10/2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes=ServiceTestConfig.class)
+@SpringApplicationConfiguration(classes= CropServiceTestConfig.class)
 @DirtiesContext
 public class CropServiceTest {
 
