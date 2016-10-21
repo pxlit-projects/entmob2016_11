@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Smart_Garden.Extensions"
+             x:Class="Smart_Garden.Pages.CharacteristicList">
+  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <local:GuidConverter x:Key="guidConverter"/>
+      <local:EmptyStringConverter x:Key="strConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <ListView x:Name="listView" ItemSelected="OnItemSelected">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+            <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+              <Label Text="{Binding Name, Converter={StaticResource strConverter}}"
+			        	YAlign="Center"
+			        	Font="Medium"
+			        	LineBreakMode="TailTruncation"
+		        	/>
+              <Label Text="{Binding ID, Converter={StaticResource guidConverter}}"
+		        		YAlign="Center"
+		        		Font="Micro"
+		        		TextColor="Gray" />
+            </StackLayout>
+          </StackLayout>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+  
+</ContentPage>

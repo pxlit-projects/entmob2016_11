@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Robotics.Mobile.Core.Bluetooth.LE;
+using Smart_Garden.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +11,20 @@ namespace Smart_Garden
 {
     public partial class App : Application
     {
-        public App()
+
+        public App(IAdapter Adapter)
         {
             InitializeComponent();
-
-            MainPage = new Smart_Garden.MainPage();
+            var np = new NavigationPage(new DeviceList(Adapter));
+            if (Device.OS != TargetPlatform.iOS)
+            {
+                // we manage iOS themeing via the native app Appearance API
+                np.BarBackgroundColor = Color.Red;
+            }
+            MainPage = np;
         }
+
+
 
         protected override void OnStart()
         {

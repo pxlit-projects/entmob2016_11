@@ -20,7 +20,10 @@ namespace Smart_Garden.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+            var a = new Robotics.Mobile.Core.Bluetooth.LE.Adapter();
+            
+            
+            LoadApplication(new App(a));
         }
     }
 }
