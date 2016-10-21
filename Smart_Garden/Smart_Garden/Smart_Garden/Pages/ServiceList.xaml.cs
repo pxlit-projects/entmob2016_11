@@ -39,6 +39,7 @@ namespace Smart_Garden.Pages
                         Device.BeginInvokeOnMainThread(() => {
                             foreach (var service in device.Services)
                             {
+
                                 services.Add(service);
                             }
                         });

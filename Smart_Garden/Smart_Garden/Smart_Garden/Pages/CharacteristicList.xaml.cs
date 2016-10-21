@@ -37,7 +37,7 @@ namespace Smart_Garden.Pages
                     Device.BeginInvokeOnMainThread(() => {
                         foreach (var characteristic in service.Characteristics)
                         {
-                            Debug.WriteLine("BANNAAN");
+                            Debug.WriteLine("BAN");
                             Debug.WriteLine(characteristic.Name);
                             characteristics.Add(characteristic);
                         }
