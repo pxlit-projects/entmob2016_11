@@ -19,6 +19,9 @@ public class Crop implements Serializable {
     @Column(name="humidity")
     private double humidity;
 
+    @Column(name="name")
+    private String name;
+
     @Column(name="temperature")
     private double temperature;
 
@@ -28,11 +31,12 @@ public class Crop implements Serializable {
     @Column(name="finaldate")
     private Date finalDate;
 
-    public Crop(double humidity, double temperature, double light, Date finalDate) {
+    public Crop(double humidity, double temperature, double light, Date finalDate, String name) {
         this.humidity = humidity;
         this.temperature = temperature;
         this.light = light;
         this.finalDate = finalDate;
+        this.name = name;
     }
     public Crop(){
 
@@ -76,5 +80,13 @@ public class Crop implements Serializable {
 
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
