@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CropRepository extends CrudRepository<Crop,Integer> {
+    Crop findCropByName(String name);
 }

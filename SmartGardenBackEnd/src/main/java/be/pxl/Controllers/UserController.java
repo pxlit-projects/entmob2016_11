@@ -25,4 +25,16 @@ public class UserController {
         return new ResponseEntity<>((Collection<User>) service.getAllUsers(), HttpStatus.OK);
 
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<User> GetUserbyID(int id){
+        return new ResponseEntity<>((User) service.findUserById(id), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<User> GetUserbyUserName(String name){
+        return new ResponseEntity<>((User) service.findUserByUserName(name), HttpStatus.OK);
+
+    }
 }

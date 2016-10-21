@@ -21,4 +21,5 @@ public class CropService {
     public void createUser(Crop crop){
         repository.save(crop);
     }
+    public Crop getCropByName(String name){return repository.findCropByName(name);}
 }
