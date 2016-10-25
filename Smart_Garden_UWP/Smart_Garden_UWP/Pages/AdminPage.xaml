@@ -18,6 +18,24 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="adminSplitView.DisplayMode"
+                                Value="Overlay"/>
+                        <Setter Target="adminSplitView.IsPaneOpen"
+                                Value="False"/>
+                        <Setter Target="adminSplitView.CompactPaneLength"
+                                Value="65"/>
+                        <Setter Target="adminSplitView.OpenPaneLength"
+                                Value="190"/>
+                        <Setter Target="logOutCompactButton.Visibility"
+                                Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="adminSplitView.DisplayMode"
                                 Value="CompactInline"/>
                         <Setter Target="adminSplitView.IsPaneOpen"
                                 Value="False"/>
@@ -27,18 +45,16 @@
                                 Value="65"/>
                         <Setter Target="adminSplitView.OpenPaneLength"
                                 Value="190"/>
-                        <Setter Target="adminSplitView.PaneBackground"
-                                Value="#05F2F2F2"/>
                     </VisualState.Setters>
                 </VisualState>
-                
+
                 <VisualState x:Name="Wide">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1008"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="adminSplitView.DisplayMode"
-                                Value="CompactInline"/>
+                                Value="Inline"/>
                         <Setter Target="adminSplitView.IsPaneOpen"
                                 Value="True"/>
                         <Setter Target="loggedInUser.Visibility"
@@ -47,6 +63,8 @@
                                 Value="65"/>
                         <Setter Target="adminSplitView.OpenPaneLength"
                                 Value="190"/>
+                        <Setter Target="logOutCompactButton.Visibility"
+                                Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -58,14 +76,17 @@
                     <RelativePanel x:Name="loggedInUser" Padding="15">
                         <TextBlock Text="Logged in as:" x:Name="loggedInLabel"/>
                         <TextBlock Text="{Binding User.Username}" x:Name="usernameLabel" RelativePanel.Below="loggedInLabel" RelativePanel.RightOf="loggedInLabel"/>
-                        <Button x:Name="logoutButton" Content="Logout" RelativePanel.Below="usernameLabel" RelativePanel.AlignLeftWith="usernameLabel"/>
+                        <Button x:Name="logoutButton" Content="Log out" RelativePanel.Below="usernameLabel" RelativePanel.AlignLeftWith="usernameLabel"/>
                     </RelativePanel>
+                    <Button Width="65" Margin="0,12,0,0" ToolTipService.ToolTip="Log out" x:Name="logOutCompactButton">
+                        <SymbolIcon Symbol="OtherUser"/>
+                    </Button>
                 </StackPanel>
             </SplitView.Pane>
             <!-- Eventually replace SplitView.Content by a frame to load the different pages in -->
             <SplitView.Content>
-                <RelativePanel>
-                    <TextBlock Text="Content comes here"/>
+                <RelativePanel HorizontalAlignment="Center">
+                    <TextBlock Text="Content comes here" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
                 </RelativePanel>
             </SplitView.Content>
         </SplitView>
