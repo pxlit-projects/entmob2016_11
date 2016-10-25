@@ -30,7 +30,7 @@ public class CropServiceTest {
         int index = 0;
         Crop current;
         List<Crop> crops = new ArrayList<Crop>();
-        crops.add(new Crop(2.0, 2.0, 2.0, new Date(12345)));
+        crops.add(new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet"));
 
         Iterator i = testCropService.getAll().iterator();
 

@@ -17,5 +17,7 @@ namespace Smart_Garden_UWP_Models
         public double Light { get; set; }
 
         public DateTime Time_Of_Year { get; set; }
+
+        public String Name { get; set; }
     }
 }

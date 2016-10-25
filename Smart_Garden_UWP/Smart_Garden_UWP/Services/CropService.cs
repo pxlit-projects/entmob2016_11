@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Smart_Garden_UWP.Services
 {
-    class CropService
+    public class CropService
     {
     }
 }

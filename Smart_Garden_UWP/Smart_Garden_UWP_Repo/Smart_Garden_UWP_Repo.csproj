@@ -112,7 +112,7 @@
     <Compile Include="Repository\Interfaces\ICropRepository.cs" />
     <Compile Include="Repository\Interfaces\ISensorRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserRepository.cs" />
-    <Compile Include="Repository\Interfaces\UserRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\SensorRepository.cs" />
     <EmbeddedResource Include="Properties\Smart_Garden_UWP_Repo.rd.xml" />
   </ItemGroup>

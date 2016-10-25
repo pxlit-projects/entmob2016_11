@@ -5,9 +5,71 @@
     xmlns:local="using:Smart_Garden_UWP.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding Source={StaticResource viewModelLocator}, Path=AdminViewModel}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <!-- SplitView is different for widths of the device -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="adminSplitView.DisplayMode"
+                                Value="CompactInline"/>
+                        <Setter Target="adminSplitView.IsPaneOpen"
+                                Value="False"/>
+                        <Setter Target="loggedInUser.Visibility"
+                                Value="Collapsed"/>
+                        <Setter Target="adminSplitView.CompactPaneLength"
+                                Value="65"/>
+                        <Setter Target="adminSplitView.OpenPaneLength"
+                                Value="190"/>
+                        <Setter Target="adminSplitView.PaneBackground"
+                                Value="#05F2F2F2"/>
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="adminSplitView.DisplayMode"
+                                Value="CompactInline"/>
+                        <Setter Target="adminSplitView.IsPaneOpen"
+                                Value="True"/>
+                        <Setter Target="loggedInUser.Visibility"
+                                Value="Visible"/>
+                        <Setter Target="adminSplitView.CompactPaneLength"
+                                Value="65"/>
+                        <Setter Target="adminSplitView.OpenPaneLength"
+                                Value="190"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
+        <SplitView x:Name="adminSplitView">
+            <SplitView.Pane>
+                <StackPanel Orientation="Vertical" Margin="0,15,0,0">
+                    <RelativePanel x:Name="loggedInUser" Padding="15">
+                        <TextBlock Text="Logged in as:" x:Name="loggedInLabel"/>
+                        <TextBlock Text="{Binding User.Username}" x:Name="usernameLabel" RelativePanel.Below="loggedInLabel" RelativePanel.RightOf="loggedInLabel"/>
+                        <Button x:Name="logoutButton" Content="Logout" RelativePanel.Below="usernameLabel" RelativePanel.AlignLeftWith="usernameLabel"/>
+                    </RelativePanel>
+                </StackPanel>
+            </SplitView.Pane>
+            <!-- Eventually replace SplitView.Content by a frame to load the different pages in -->
+            <SplitView.Content>
+                <RelativePanel>
+                    <TextBlock Text="Content comes here"/>
+                </RelativePanel>
+            </SplitView.Content>
+        </SplitView>
+
+        <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" VerticalAlignment="Top" Width="{Binding ElementName=adminSplitView, Path=CompactPaneLength}"/>
     </Grid>
 </Page>

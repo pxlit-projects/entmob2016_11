@@ -8,11 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Smart_Garden_UWP_Models;
 
 namespace Smart_Garden_UWP.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        private UserService userService;
+        private NavigationService navigationService;
+
         private String username;
         public String Username
         {
@@ -57,9 +61,11 @@ namespace Smart_Garden_UWP.ViewModels
 
         public CustomCommand LoginCommand { get; set; }
 
-        public LoginViewModel()
+        public LoginViewModel(UserService userService, NavigationService navigationService)
         {
             LoadCommands();
+            this.userService = userService;
+            this.navigationService = navigationService;
         }
 
         private void LoadCommands()
@@ -73,16 +79,31 @@ namespace Smart_Garden_UWP.ViewModels
             //{
             //    return true;
             //}
-
             return true;
         }
 
         private async void Login(object obj)
         {
-            UserService userService = new UserService();
-            string str = await userService.getAllUsers();
-            if (str != null)
-                Debug.WriteLine(str);
+            User user = await userService.getUserByUsername(Username);
+
+            if (checkLogin(user))
+            {
+                //TODO Check role
+
+                //navigate
+                Messenger.Default.Send<User>(user);
+                navigationService.NavigateTo("Admin");
+            }
+        }
+
+        private Boolean checkLogin(User user)
+        {
+            if(user != null && user.Password.Equals(Password))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

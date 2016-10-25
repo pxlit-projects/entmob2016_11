@@ -1,4 +1,5 @@
-﻿using Smart_Garden_UWP.ViewModels;
+﻿using Smart_Garden_UWP.Services;
+using Smart_Garden_UWP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Smart_Garden_UWP
 {
     public class ViewModelLocator
     {
-        private static LoginViewModel loginViewModel = new LoginViewModel();
-        private static AdminViewModel adminViewModel = new AdminViewModel();
-        private static StatisticsViewModel statisticsViewModel = new StatisticsViewModel();
+        private static LoginViewModel loginViewModel = new LoginViewModel(new UserService(), new NavigationService());
+        private static AdminViewModel adminViewModel = new AdminViewModel(new UserService(), new NavigationService(), new CropService());
+        private static StatisticsViewModel statisticsViewModel = new StatisticsViewModel(new UserService(), new NavigationService(), new CropService(), new SensorService());
 
         public static LoginViewModel LoginViewModel
         {

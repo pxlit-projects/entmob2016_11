@@ -10,13 +10,15 @@ namespace Smart_Garden_UWP_Repo.Repository
     public interface IUserRepository
     {
         // Gets a user by his username
-        User getUserByUsername();
+        Task<User> getUserByUsername(String username);
         // Gets a list of all users
-        Task<string> getAllUsers();
+        Task<List<User>> getAllUsers();
 
         // Adds a user to the database
         void addUser();
         // Delets a user from the database
         void deleteUser();
+        // Get the user's role
+        Task<String> getUserRole(User user);
     }
 }

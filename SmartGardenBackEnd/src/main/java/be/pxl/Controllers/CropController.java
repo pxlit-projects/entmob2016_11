@@ -26,7 +26,7 @@ public class CropController {
 
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/getByName",method = RequestMethod.GET)
     public ResponseEntity<Crop> getCropByName(String name){
         return new ResponseEntity<>((Crop) service.getCropByName(name), HttpStatus.OK);
 
