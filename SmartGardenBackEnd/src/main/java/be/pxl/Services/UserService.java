@@ -12,14 +12,12 @@ import java.util.List;
  * Created by 11308157 on 7/10/2016.
  */
 @Service
-public class UserService  {
+public class UserService implements IUserService {
 
     @Autowired
     UserRepository repository;
 
-    public void createUser(User user){
-        repository.save(user);
-    }
+    public void createUser(User user){ repository.save(user);}
     public User findUserById(int id){
         return repository.findOne(id);
     }

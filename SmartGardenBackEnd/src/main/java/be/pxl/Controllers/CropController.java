@@ -30,5 +30,10 @@ public class CropController {
         return new ResponseEntity<>(service.getCropByName(name), HttpStatus.OK);
 
     }
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @ResponseBody
+    public void addRestaurantWebView(@RequestBody Crop crop){
+        service.createCrop(crop);
+    }
 
 }

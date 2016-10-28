@@ -12,5 +12,5 @@ import java.util.List;
  */
 @Repository
 public interface SensorEntityRepository extends CrudRepository<SensorEntity, Integer> {
-    List<SensorEntity> findByTimeOfRecordingBetween(Date date1, Date date2);
+
 }

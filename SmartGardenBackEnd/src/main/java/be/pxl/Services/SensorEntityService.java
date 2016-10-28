@@ -12,14 +12,11 @@ import java.util.List;
  * Created by 11308157 on 7/10/2016.
  */
 @Service
-public class SensorEntityService {
+public class SensorEntityService implements ISensorEntityService {
 
     @Autowired
     SensorEntityRepository repository;
 
-    public List<SensorEntity> findSensorEntitiesBetweenDates(Date d1, Date d2){
-            return repository.findByTimeOfRecordingBetween(d1, d2);
-    }
     public void CreateEntity(SensorEntity sensorEntity){
         repository.save(sensorEntity);
     }
