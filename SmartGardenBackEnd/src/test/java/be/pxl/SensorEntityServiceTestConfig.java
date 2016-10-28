@@ -33,7 +33,6 @@ public class SensorEntityServiceTestConfig {
         SensorEntityRepository testRepo =  Mockito.mock(SensorEntityRepository.class);
         doThrow(new RecoverableDataAccessException("error")).when(testRepo).save((SensorEntity) anyObject());
         when(testRepo.findAll()).thenReturn(sensorValues);
-        when(testRepo.findByTimeOfRecordingBetween(anyObject(), anyObject())).thenReturn(sensorValues);
         when(testRepo.findOne( any())).thenReturn(sTag);
         return testRepo;
     }

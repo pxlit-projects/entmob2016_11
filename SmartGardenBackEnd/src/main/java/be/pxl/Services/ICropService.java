@@ -6,7 +6,7 @@ import be.pxl.Models.Crop;
  * Created by 11308157 on 28/10/2016.
  */
 public interface ICropService {
-    public Iterable<Crop> getAll();
-    public void createCrop(Crop crop);
-    public Crop getCropByName(String name);
+    Iterable<Crop> getAll();
+    void createCrop(Crop crop);
+    Crop getCropByName(String name);
 }

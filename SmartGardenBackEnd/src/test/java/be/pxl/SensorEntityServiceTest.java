@@ -46,32 +46,6 @@ public class SensorEntityServiceTest {
     }
 
     @Test
-    public void testFindBetween(){
-        boolean eq = false;
-        int index = 0;
-        SensorEntity current;
-        List<SensorEntity> sensorValues = new ArrayList<>();
-        sensorValues.add(new SensorEntity(1.0, 1.0, 1.0, null, false));
-
-        Iterator i = testSensorService.findSensorEntitiesBetweenDates(new Date(), new Date()).iterator();
-
-        while(i.hasNext()){
-            current = (SensorEntity) i.next();
-            if(current.getHumidity() == sensorValues.get(index).getHumidity()
-                    && current.getLight() == sensorValues.get(index).getLight()
-                    && current.getTemperature() == sensorValues.get(index).getTemperature()
-                    && current.isAbove() == sensorValues.get(index).isAbove()){
-                eq = true;
-            }else{
-                eq = false;
-            }
-            index++;
-        }
-
-        Assert.assertTrue(eq);
-    }
-
-    @Test
     public void testFindAll(){
 
         boolean eq = false;

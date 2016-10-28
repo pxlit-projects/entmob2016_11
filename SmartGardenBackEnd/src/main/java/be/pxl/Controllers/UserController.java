@@ -1,6 +1,7 @@
 package be.pxl.Controllers;
 
 import be.pxl.Models.User;
+import be.pxl.Services.IUserService;
 import be.pxl.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.util.Collection;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService service;
+    private IUserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Collection<User>> GetAllUsers(){

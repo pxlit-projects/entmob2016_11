@@ -53,7 +53,7 @@ public class CropServiceTest {
 
     @Test(expected = RecoverableDataAccessException.class)
     public void testCreate(){
-        testCropService.createUser(new Crop());
+        testCropService.createCrop(new Crop());
     }
 
 }
