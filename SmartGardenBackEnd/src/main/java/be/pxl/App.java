@@ -1,6 +1,7 @@
 package be.pxl;
 
 
+import be.pxl.Logger.Receiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +30,9 @@ public class App
     }
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    Receiver receiver;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
