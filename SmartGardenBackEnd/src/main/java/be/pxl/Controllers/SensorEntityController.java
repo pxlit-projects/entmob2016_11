@@ -24,7 +24,5 @@ public class SensorEntityController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Collection<SensorEntity>> getAllSensors(){
         return new ResponseEntity<>((Collection<SensorEntity>) service.getAll(), HttpStatus.OK);
-
     }
-
 }

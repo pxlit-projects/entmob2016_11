@@ -25,10 +25,9 @@ public class CropController {
         return new ResponseEntity<>((Collection<Crop>) service.getAll(), HttpStatus.OK);
 
     }
-
-    @RequestMapping(value="/getByName",method = RequestMethod.GET)
-    public ResponseEntity<Crop> getCropByName(String name){
-        return new ResponseEntity<>((Crop) service.getCropByName(name), HttpStatus.OK);
+    @RequestMapping(value="/getByName/{name}", method = RequestMethod.GET)
+    public ResponseEntity<Crop> getCropByName(@PathVariable(value="name") String name){
+        return new ResponseEntity<>(service.getCropByName(name), HttpStatus.OK);
 
     }
 

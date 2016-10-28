@@ -51,7 +51,7 @@ public class UserServiceTest {
         int index = 0;
         User current;
         List<User> users = new ArrayList<>();
-        users.add(new User("john", "test"));
+        users.add(new User("john", "test", "admin"));
 
         Iterator i = testUserService.getAllUsers().iterator();
 

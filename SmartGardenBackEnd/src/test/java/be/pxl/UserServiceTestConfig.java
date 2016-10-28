@@ -27,7 +27,7 @@ public class UserServiceTestConfig {
     public UserRepository repository(){
 
         List<User> users = new ArrayList<>();
-        User john = new User("john", "test");
+        User john = new User("john", "test", "admin");
         users.add(john);
         UserRepository testRepo =  Mockito.mock(UserRepository.class);
         doThrow(new RecoverableDataAccessException("error")).when(testRepo).save((User) anyObject());
