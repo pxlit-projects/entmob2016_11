@@ -2,7 +2,7 @@ package be.pxl.Controllers;
 
 import be.pxl.Models.SensorEntity;
 import be.pxl.Services.ISensorEntityService;
-import be.pxl.Services.SensorEntityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,15 @@ import java.util.Collection;
 public class SensorEntityController {
     @Autowired
     private ISensorEntityService service;
+
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Collection<SensorEntity>> getAllSensors(){
         return new ResponseEntity<>((Collection<SensorEntity>) service.getAll(), HttpStatus.OK);
     }
+
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public void addRestaurantWebView(@RequestBody SensorEntity entity){
+    public void addSensorEntity(@RequestBody SensorEntity entity){
         service.CreateEntity(entity);
     }
 }

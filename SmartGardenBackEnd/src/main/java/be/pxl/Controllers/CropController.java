@@ -1,7 +1,6 @@
 package be.pxl.Controllers;
 
 import be.pxl.Models.Crop;
-import be.pxl.Services.CropService;
 import be.pxl.Services.ICropService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +32,7 @@ public class CropController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public void addRestaurantWebView(@RequestBody Crop crop){
+    public void addCrop(@RequestBody Crop crop){
         service.createCrop(crop);
     }
 

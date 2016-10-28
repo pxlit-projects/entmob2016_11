@@ -2,6 +2,7 @@ package be.pxl;
 
 import be.pxl.Models.SensorEntity;
 import be.pxl.Repositories.SensorEntityRepository;
+import be.pxl.Services.ISensorEntityService;
 import be.pxl.Services.SensorEntityService;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +39,7 @@ public class SensorEntityServiceTestConfig {
     }
 
     @Bean
-    public SensorEntityService testSensorService(){
+    public ISensorEntityService testSensorService(){
         return new SensorEntityService();
     }
 }

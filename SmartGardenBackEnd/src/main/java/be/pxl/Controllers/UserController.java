@@ -2,14 +2,12 @@ package be.pxl.Controllers;
 
 import be.pxl.Models.User;
 import be.pxl.Services.IUserService;
-import be.pxl.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Path;
 import java.util.Collection;
 
 /**
@@ -36,7 +34,10 @@ public class UserController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca0f3c2755c9c6d9b58cd7aad2cb7d3faf0b2971
     public void addUser(@RequestBody User user){
         service.createUser(user);
     }

@@ -2,12 +2,14 @@ package be.pxl;
 
 import be.pxl.Models.Crop;
 import be.pxl.Services.CropService;
+import be.pxl.Services.ICropService;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.*;
@@ -16,12 +18,12 @@ import java.util.*;
  * Created by 11402946 on 19/10/2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes= CropServiceTestConfig.class)
+@ContextConfiguration(classes= CropServiceTestConfig.class)
 @DirtiesContext
 public class CropServiceTest {
 
     @Autowired
-    private CropService testCropService;
+    private ICropService testCropService;
 
     @Test
     public void testFindAll(){

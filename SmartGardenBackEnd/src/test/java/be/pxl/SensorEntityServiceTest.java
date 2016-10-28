@@ -2,6 +2,7 @@ package be.pxl;
 
 import be.pxl.Models.SensorEntity;
 import be.pxl.Models.User;
+import be.pxl.Services.ISensorEntityService;
 import be.pxl.Services.SensorEntityService;
 import be.pxl.Services.UserService;
 import org.junit.Assert;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
@@ -22,12 +24,12 @@ import java.util.List;
  * Created by 11402946 on 21/10/2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes= SensorEntityServiceTestConfig.class)
+@ContextConfiguration(classes= SensorEntityServiceTestConfig.class)
 @DirtiesContext
 public class SensorEntityServiceTest {
 
     @Autowired
-    private SensorEntityService testSensorService;
+    private ISensorEntityService testSensorService;
 
     @Test(expected = RecoverableDataAccessException.class)
     public void testCreate(){
