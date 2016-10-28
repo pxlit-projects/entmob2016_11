@@ -1,7 +1,7 @@
 package be.pxl.Controllers;
 
 import be.pxl.Models.User;
-import be.pxl.Services.UserService;
+import be.pxl.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.Collection;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService service;
+    private IUserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Collection<User>> GetAllUsers(){
@@ -35,7 +35,7 @@ public class UserController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public void addRestaurantWebView(@RequestBody User user){
+    public void addUser(@RequestBody User user){
         service.createUser(user);
     }
 }

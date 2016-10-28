@@ -5,6 +5,7 @@ import be.pxl.Models.User;
 import be.pxl.Repositories.CropRepository;
 import be.pxl.Repositories.UserRepository;
 import be.pxl.Services.CropService;
+import be.pxl.Services.ICropService;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -40,7 +41,7 @@ public class CropServiceTestConfig {
     }
 
     @Bean
-    public CropService testCropService(){
+    public ICropService testCropService(){
         return new CropService();
     }
 

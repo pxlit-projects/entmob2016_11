@@ -1,7 +1,7 @@
 package be.pxl.Controllers;
 
 import be.pxl.Models.Crop;
-import be.pxl.Services.CropService;
+import be.pxl.Services.ICropService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.Collection;
 @RequestMapping("/crop")
 public class CropController {
     @Autowired
-    private CropService service;
+    private ICropService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Collection<Crop>> getAllCrops(){
@@ -32,7 +32,7 @@ public class CropController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public void addRestaurantWebView(@RequestBody Crop crop){
+    public void addCrop(@RequestBody Crop crop){
         service.createCrop(crop);
     }
 

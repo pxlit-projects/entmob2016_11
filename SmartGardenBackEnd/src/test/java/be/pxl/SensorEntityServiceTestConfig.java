@@ -2,6 +2,7 @@ package be.pxl;
 
 import be.pxl.Models.SensorEntity;
 import be.pxl.Repositories.SensorEntityRepository;
+import be.pxl.Services.ISensorEntityService;
 import be.pxl.Services.SensorEntityService;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -33,13 +34,12 @@ public class SensorEntityServiceTestConfig {
         SensorEntityRepository testRepo =  Mockito.mock(SensorEntityRepository.class);
         doThrow(new RecoverableDataAccessException("error")).when(testRepo).save((SensorEntity) anyObject());
         when(testRepo.findAll()).thenReturn(sensorValues);
-        when(testRepo.findByTimeOfRecordingBetween(anyObject(), anyObject())).thenReturn(sensorValues);
         when(testRepo.findOne( any())).thenReturn(sTag);
         return testRepo;
     }
 
     @Bean
-    public SensorEntityService testSensorService(){
+    public ISensorEntityService testSensorService(){
         return new SensorEntityService();
     }
 }

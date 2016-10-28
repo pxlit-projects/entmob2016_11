@@ -2,6 +2,7 @@ package be.pxl;
 
 import be.pxl.Models.User;
 import be.pxl.Repositories.UserRepository;
+import be.pxl.Services.IUserService;
 import be.pxl.Services.UserService;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +39,7 @@ public class UserServiceTestConfig {
     }
 
     @Bean
-    public UserService testUserService(){
+    public IUserService testUserService(){
         return new UserService();
     }
 }
