@@ -34,12 +34,12 @@ public class UserServiceTest {
 
     @Test(expected = RecoverableDataAccessException.class)
     public void testDelete(){
-        testUserService.deleteUser(0);
+        testUserService.deleteUser("john");
     }
 
     @Test
     public void testFindOne(){
-        User john = testUserService.findUserById(0);
+        User john = testUserService.findUserByUserName("john");
         Assert.assertEquals(john.getUsername(), "john");
     }
 
@@ -50,7 +50,7 @@ public class UserServiceTest {
         int index = 0;
         User current;
         List<User> users = new ArrayList<>();
-        users.add(new User("john", "test", "ROLE_ADMIN"));
+        users.add(new User("john", "test"));
 
         Iterator i = testUserService.getAllUsers().iterator();
 

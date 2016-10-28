@@ -34,10 +34,6 @@ public class UserController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-<<<<<<< HEAD
-
-=======
->>>>>>> ca0f3c2755c9c6d9b58cd7aad2cb7d3faf0b2971
     public void addUser(@RequestBody User user){
         service.createUser(user);
     }
