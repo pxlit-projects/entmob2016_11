@@ -55,22 +55,16 @@ public class UserServiceTest {
     @Test
     public void testDelete(){
         testUserService.deleteUser("john");
-<<<<<<< HEAD
         verify(repositoryMock).deleteByusername("john");
-=======
->>>>>>> afeac9d7e8d18c918d06f73571f0c48d6c4d31ae
+
     }
 
     @Test
     public void testFindOne(){
-<<<<<<< HEAD
         when(repositoryMock.findByusername(anyString())).thenReturn(testUser);
         User john = testUserService.findUserByUserName("john");
         Assert.assertEquals(john.getUsername(), testUser.getUsername());
-=======
-        User john = testUserService.findUserByUserName("john");
-        Assert.assertEquals(john.getUsername(), "john");
->>>>>>> afeac9d7e8d18c918d06f73571f0c48d6c4d31ae
+
     }
 
     @Test
@@ -80,12 +74,8 @@ public class UserServiceTest {
         int index = 0;
         User current;
         List<User> users = new ArrayList<>();
-<<<<<<< HEAD
         users.add(testUser);
         when(repositoryMock.findAll()).thenReturn(users);
-=======
-        users.add(new User("john", "test"));
->>>>>>> afeac9d7e8d18c918d06f73571f0c48d6c4d31ae
 
         Iterator i = testUserService.getAllUsers().iterator();
 
