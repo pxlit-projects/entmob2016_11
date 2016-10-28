@@ -2,6 +2,7 @@ package be.pxl.Controllers;
 
 import be.pxl.Models.SensorEntity;
 import be.pxl.Services.ISensorEntityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

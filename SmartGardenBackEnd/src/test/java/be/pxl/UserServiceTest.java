@@ -50,7 +50,7 @@ public class UserServiceTest {
         int index = 0;
         User current;
         List<User> users = new ArrayList<>();
-        users.add(new User("john", "test", "admin"));
+        users.add(new User("john", "test", "ROLE_ADMIN"));
 
         Iterator i = testUserService.getAllUsers().iterator();
 

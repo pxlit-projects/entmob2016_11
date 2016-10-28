@@ -28,5 +28,4 @@ public class UserService implements IUserService {
         return repository.findAll();
     }
     public User findUserByUserName(String name){return repository.findByusername(name);}
-
 }
