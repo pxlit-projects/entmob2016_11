@@ -26,9 +26,9 @@ public class UserController {
     public ResponseEntity<Collection<User>> GetAllUsers(){
         return new ResponseEntity<>((Collection<User>) service.getAllUsers(), HttpStatus.OK);
     }
-    @RequestMapping(value="/getByID/{id}",method = RequestMethod.GET)
-    public ResponseEntity<User> GetUserbyID(@PathVariable(value="id") int id){
-        return new ResponseEntity<>(service.findUserById(id), HttpStatus.OK);
+    @RequestMapping(value="/getByName/{name}",method = RequestMethod.GET)
+    public ResponseEntity<User> GetUserbyID(@PathVariable(value="name") String name){
+        return new ResponseEntity<>(service.findUserByUserName(name), HttpStatus.OK);
     }
     @RequestMapping(value="/getByUsername/{name}", method = RequestMethod.GET)
     public ResponseEntity<User> GetUserbyUserName(@PathVariable(value="name") String name){
@@ -36,7 +36,19 @@ public class UserController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public void addRestaurantWebView(@RequestBody User user){
+
+    public void addUser(@RequestBody User user){
         service.createUser(user);
+    }
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @ResponseBody
+    public void deleteUser(@RequestBody String name){
+        service.deleteUser(name);
+    }
+
+    @RequestMapping(value = "/update",method = RequestMethod.PUT)
+    @ResponseBody
+    public void updateUser(@RequestBody User user){
+        service.updateUser(user);
     }
 }
