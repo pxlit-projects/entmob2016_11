@@ -1,13 +1,18 @@
 package be.pxl;
 
+import be.pxl.Logger.Sender;
 import be.pxl.Models.SensorEntity;
 import be.pxl.Models.User;
-import be.pxl.Services.ISensorEntityService;
+import be.pxl.Repositories.SensorEntityRepository;
 import be.pxl.Services.SensorEntityService;
 import be.pxl.Services.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.RecoverableDataAccessException;
@@ -20,24 +25,37 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
 /**
  * Created by 11402946 on 21/10/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= SensorEntityServiceTestConfig.class)
-@DirtiesContext
+@RunWith(MockitoJUnitRunner.class)
 public class SensorEntityServiceTest {
 
-    @Autowired
-    private ISensorEntityService testSensorService;
+    @Mock
+    private SensorEntityRepository repositoryMock;
 
-    @Test(expected = RecoverableDataAccessException.class)
+    @Mock
+    private Sender senderMock;
+
+    @InjectMocks
+    private SensorEntityService testSensorService;
+
+    @Test
     public void testCreate(){
-        testSensorService.CreateEntity(new SensorEntity());
+        SensorEntity entity = new SensorEntity(2.0, 2.0, 2.0, null, true);
+        testSensorService.CreateEntity(entity);
+        Mockito.verify(repositoryMock).save(entity);
+
     }
 
     @Test
     public void testFindOne(){
+
+        when(repositoryMock.findOne(anyInt())).thenReturn(new SensorEntity(1.0, 1.0, 1.0, null, false));
+
         SensorEntity sTag = testSensorService.getEntityById(0);
         boolean eq = false;
         if(sTag.getHumidity() == 1.0 && sTag.getLight() == 1.0 && sTag.getTemperature() == 1.0 && !sTag.isAbove()){
@@ -55,6 +73,7 @@ public class SensorEntityServiceTest {
         SensorEntity current;
         List<SensorEntity> sensorValues = new ArrayList<>();
         sensorValues.add(new SensorEntity(1.0, 1.0, 1.0, null, false));
+        when(repositoryMock.findAll()).thenReturn(sensorValues);
 
         Iterator i = testSensorService.getAll().iterator();
 

@@ -1,29 +1,37 @@
 package be.pxl;
 
+import be.pxl.Logger.Sender;
 import be.pxl.Models.Crop;
+import be.pxl.Repositories.CropRepository;
 import be.pxl.Services.CropService;
-import be.pxl.Services.ICropService;
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.dao.RecoverableDataAccessException;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.*;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by 11402946 on 19/10/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= CropServiceTestConfig.class)
-@DirtiesContext
+@RunWith(MockitoJUnitRunner.class)
 public class CropServiceTest {
 
-    @Autowired
-    private ICropService testCropService;
+    @Mock
+    private CropRepository repositoryMock;
+
+    @Mock
+    private Sender senderMock;
+
+    @InjectMocks
+    private CropService testCropService;
 
     @Test
     public void testFindAll(){
@@ -33,6 +41,7 @@ public class CropServiceTest {
         Crop current;
         List<Crop> crops = new ArrayList<Crop>();
         crops.add(new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet"));
+        when(repositoryMock.findAll()).thenReturn(crops);
 
         Iterator i = testCropService.getAll().iterator();
 
@@ -53,9 +62,26 @@ public class CropServiceTest {
 
     }
 
-    @Test(expected = RecoverableDataAccessException.class)
+    @Test
+    public void testCropByName(){
+
+        Crop newCrop = new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet");
+        when(repositoryMock.findCropByName(anyString())).thenReturn(newCrop);
+
+        Crop crop = testCropService.getCropByName("Wiet");
+        Assert.assertEquals(crop.getTemperature(), newCrop.getTemperature(), 0.001);
+        Assert.assertEquals(crop.getLight(), newCrop.getLight(), 0.001);
+        Assert.assertEquals(crop.getHumidity(), newCrop.getHumidity(), 0.001);
+        Assert.assertEquals(crop.getFinalDate(), newCrop.getFinalDate());
+        Assert.assertEquals(crop.getName(), newCrop.getName());
+
+    }
+
+    @Test
     public void testCreate(){
-        testCropService.createCrop(new Crop());
+        Crop crop = new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet");
+        testCropService.createCrop(crop);
+        Mockito.verify(repositoryMock).save(crop);
     }
 
 }

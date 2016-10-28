@@ -32,5 +32,6 @@ public class SensorEntityService implements ISensorEntityService {
         return repository.findOne(id);
     }
     public Iterable<SensorEntity> getAll(){
+        sender.sendMessage("Searched all entities at : " + LocalDateTime.now());
         return repository.findAll();}
 }

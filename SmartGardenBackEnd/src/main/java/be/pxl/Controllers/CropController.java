@@ -1,6 +1,7 @@
 package be.pxl.Controllers;
 
 import be.pxl.Models.Crop;
+import be.pxl.Services.CropService;
 import be.pxl.Services.ICropService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

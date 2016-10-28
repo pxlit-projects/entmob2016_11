@@ -15,7 +15,7 @@ public class User {
 
     }
 
-    public User(String username, String password, String role) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -33,6 +33,16 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<SensorEntity> sensorEntities = new HashSet<SensorEntity>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
 
     public String getUsername() {
         return username;

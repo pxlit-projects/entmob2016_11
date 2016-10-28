@@ -7,8 +7,8 @@ import be.pxl.Models.User;
  */
 public interface IUserService {
     void createUser(User user);
-    User findUserById(int id);
-    void deleteUser(int id);
     Iterable<User> getAllUsers();
     User findUserByUserName(String name);
+    void updateUser(User user);
+    void deleteUser(String name);
 }

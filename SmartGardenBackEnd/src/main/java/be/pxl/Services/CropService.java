@@ -16,17 +16,17 @@ import java.time.LocalDateTime;
 public class CropService implements ICropService {
 
     @Autowired
-    CropRepository repository;
+    private CropRepository repository;
 
     @Autowired
-    Sender sender;
+    private Sender sender;
 
     public Iterable<Crop> getAll(){
-        sender.sendMessage("Every crop is requested at : " + LocalDateTime.now());
+        sender.sendMessage("Searched all crops at : " + LocalDateTime.now());
         return repository.findAll();
     }
     public void createCrop(Crop crop){
-        sender.sendMessage("Crop " + crop.getName() + " created at : " + LocalDateTime.now());
+        sender.sendMessage("Crop : " + crop.getName() + " created at : " + LocalDateTime.now());
         repository.save(crop);
     }
     public Crop getCropByName(String name){
