@@ -23,6 +23,17 @@ public class UserRole {
     @Column(name="role")
     private String role;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Column(name="username")
+    private String username;
+
     @JsonIgnore
     @ManyToOne
     private User user;
