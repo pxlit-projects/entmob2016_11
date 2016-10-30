@@ -11,7 +11,10 @@ import javax.persistence.*;
 @Table(name="user_roles")
 public class UserRole {
 
-    public UserRole(String role) {
+    public UserRole(){}
+
+    public UserRole(String role, String username) {
+        this.username = username;
         this.role = role;
     }
 

@@ -24,6 +24,7 @@ public class User {
     @Column(name="id")
     private int id;
 
+
     @Column(name="username")
     private String username;
 
@@ -78,6 +79,14 @@ public class User {
 
     public void setSensorEntities(Set<SensorEntity> sensorEntities) {
         this.sensorEntities = sensorEntities;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
