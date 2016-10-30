@@ -20,6 +20,10 @@ public class User {
         this.password = password;
     }
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
+
     @Column(name="username")
     private String username;
 

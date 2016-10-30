@@ -32,9 +32,6 @@ public class App
     DataSource dataSource;
 
     @Autowired
-    Receiver receiver;
-
-    @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource)
