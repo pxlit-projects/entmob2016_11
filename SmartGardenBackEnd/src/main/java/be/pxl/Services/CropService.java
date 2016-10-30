@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 public class CropService implements ICropService {
 
     @Autowired
-    CropRepository repository;
+    private CropRepository repository;
 
     @Autowired
-    Sender sender;
+    private Sender sender;
 
     public Iterable<Crop> getAll(){
         sender.sendMessage("Searched all crops at : " + LocalDateTime.now());
