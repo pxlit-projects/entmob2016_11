@@ -36,29 +36,11 @@ public class CropServiceTest {
     @Test
     public void testFindAll(){
 
-        boolean eq = false;
-        int index = 0;
-        Crop current;
         List<Crop> crops = new ArrayList<Crop>();
         crops.add(new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet"));
         when(repositoryMock.findAll()).thenReturn(crops);
 
-        Iterator i = testCropService.getAll().iterator();
-
-        while(i.hasNext()){
-            current = (Crop)i.next();
-            if((current.getFinalDate()).equals(crops.get(index).getFinalDate())
-                    && current.getHumidity() == crops.get(index).getHumidity()
-                    && current.getLight() == crops.get(index).getLight()
-                    && current.getTemperature() == crops.get(index).getTemperature()){
-                eq = true;
-            }else{
-                eq = false;
-            }
-            index++;
-        }
-
-        Assert.assertTrue(eq);
+        Assert.assertEquals(testCropService.getAll().getClass(), crops);
 
     }
 
@@ -69,11 +51,7 @@ public class CropServiceTest {
         when(repositoryMock.findCropByName(anyString())).thenReturn(newCrop);
 
         Crop crop = testCropService.getCropByName("Wiet");
-        Assert.assertEquals(crop.getTemperature(), newCrop.getTemperature(), 0.001);
-        Assert.assertEquals(crop.getLight(), newCrop.getLight(), 0.001);
-        Assert.assertEquals(crop.getHumidity(), newCrop.getHumidity(), 0.001);
-        Assert.assertEquals(crop.getFinalDate(), newCrop.getFinalDate());
-        Assert.assertEquals(crop.getName(), newCrop.getName());
+        Assert.assertEquals(newCrop.getClass(), crop.getClass());
 
     }
 
