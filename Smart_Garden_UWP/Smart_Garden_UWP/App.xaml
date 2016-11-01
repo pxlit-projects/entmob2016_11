@@ -3,11 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Smart_Garden_UWP"
+    xmlns:Converter="using:Smart_Garden_UWP.Converter"
     RequestedTheme="Light">
 
     <Application.Resources>
         <ResourceDictionary>
             <local:ViewModelLocator x:Key="viewModelLocator"></local:ViewModelLocator>
+            <Converter:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,14 +1,9 @@
 ﻿using Smart_Garden_UWP.Utilities;
 using Smart_Garden_UWP.Services;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Smart_Garden_UWP_Models;
+using SmarT_Garden_UWP_Models.Models;
 
 namespace Smart_Garden_UWP.ViewModels
 {
@@ -88,11 +83,16 @@ namespace Smart_Garden_UWP.ViewModels
 
             if (checkLogin(user))
             {
-                //TODO Check role
-
-                //navigate
-                Messenger.Default.Send<User>(user);
-                navigationService.NavigateTo("Admin");
+                if (user.Role.FindIndex(x => x.Role.Equals("ROLE_ADMIN")) != -1)
+                {
+                    //navigate
+                    Messenger.Default.Send<User>(user);
+                    navigationService.NavigateTo("Admin");
+                }
+                else
+                {
+                    navigationService.NavigateTo("User");
+                }
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +10,18 @@ namespace Smart_Garden_UWP_Models
 {
     public class Crop
     {
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        public double Temp { get; set; }
-
-        public double Humid { get; set; }
-
+        [JsonProperty("temperature")]
+        public double Temperature { get; set; }
+        [JsonProperty("humidity")]
+        public double Humidity { get; set; }
+        [JsonProperty("light")]
         public double Light { get; set; }
-
-        public DateTime Time_Of_Year { get; set; }
-
+        [JsonProperty("finalDate")]
+        public DateTime FinalDate { get; set; }
+        [JsonProperty("name")]
         public String Name { get; set; }
     }
 }

@@ -10,16 +10,14 @@ namespace Smart_Garden_UWP_Repo.Repository.Interfaces
     public interface ICropRepository
     {
         // Gets a list of all crops
-        List<Crop> getAllCrops();
-        // Gets a crop by time of year
-        List<Crop> getCropsByTimeOfYear();
+        Task<List<Crop>> getAllCrops();
         // Gets a crop by its name
-        Crop getCropByName();
+        Task<Crop> getCropByName(String name);
 
         // Adds a crop to the database
-        void addCrop();
+        Task<Boolean> addCrop(Crop crop);
         // Deletes a crop from the database
-        void deleteCrop();
+        Task<Boolean> deleteCrop(Crop crop);
 
     }
 }

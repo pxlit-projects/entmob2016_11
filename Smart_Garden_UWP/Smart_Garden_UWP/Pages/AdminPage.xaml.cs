@@ -26,5 +26,29 @@ namespace Smart_Garden_UWP.Pages
         {
             this.InitializeComponent();
         }
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            adminSplitView.IsPaneOpen = !adminSplitView.IsPaneOpen;
+
+            String currentState = VisualStateManager.GetVisualStateGroups(pageGrid)[0].CurrentState.Name;
+
+            if (adminSplitView.IsPaneOpen)
+            {
+                if (currentState.Equals("Compact"))
+                {
+                    logOutCompactButton.Visibility = Visibility.Collapsed;
+                    loggedInUser.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                if (currentState.Equals("Compact"))
+                {
+                    logOutCompactButton.Visibility = Visibility.Visible;
+                    loggedInUser.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SmarT_Garden_UWP_Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +11,15 @@ namespace Smart_Garden_UWP_Models
     public class User
     {
         public int Id { get; set; }
-
+        [JsonProperty("username")]
         public string Username { get; set; }
-
+        [JsonProperty("password")]
         public string Password { get; set; }
-
-        public string Discriminator { get; set; }
+        [JsonProperty("userRoles")]
+        public List<UserRole> Role { get; set; }
+        [JsonProperty("enabled")]
+        public bool Enabled { get; set; }
+        [JsonProperty("sensorEntities")]
+        public List<Sensor> Sensors { get; set; }
     }
 }
