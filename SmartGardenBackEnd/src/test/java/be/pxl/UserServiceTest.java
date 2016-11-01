@@ -54,8 +54,9 @@ public class UserServiceTest {
 
     @Test
     public void testDelete(){
-        testUserService.deleteUser("john");
-        verify(repositoryMock).deleteByusername("john");
+        User testUser = new User("john", "123456");
+        testUserService.deleteUser(testUser);
+        verify(repositoryMock).delete(testUser);
 
     }
 

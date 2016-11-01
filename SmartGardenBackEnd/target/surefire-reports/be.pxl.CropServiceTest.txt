@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: be.pxl.CropServiceTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.171 sec <<< FAILURE! - in be.pxl.CropServiceTest
+testFindAll(be.pxl.CropServiceTest)  Time elapsed: 0.064 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<class java.util.ArrayList> but was:<[be.pxl.Models.Crop@6279cee3]>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at be.pxl.CropServiceTest.testFindAll(CropServiceTest.java:44)
+

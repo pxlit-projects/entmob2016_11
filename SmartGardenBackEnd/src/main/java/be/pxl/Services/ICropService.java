@@ -9,4 +9,6 @@ public interface ICropService {
     Iterable<Crop> getAll();
     void createCrop(Crop crop);
     Crop getCropByName(String name);
+
+    void deleteCrop(Crop crop);
 }

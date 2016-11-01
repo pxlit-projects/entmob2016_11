@@ -42,8 +42,8 @@ public class UserController {
     }
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ResponseBody
-    public void deleteUser(@RequestBody String name){
-        service.deleteUser(name);
+    public void deleteUser(@RequestBody User user){
+        service.deleteUser(user);
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
