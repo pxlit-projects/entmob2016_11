@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 import static org.mockito.Matchers.anyString;
@@ -37,7 +38,7 @@ public class CropServiceTest {
     public void testFindAll(){
 
         List<Crop> crops = new ArrayList<Crop>();
-        crops.add(new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet"));
+        crops.add(new Crop(2.0, 2.0, 2.0, new Timestamp(12345), "Wiet"));
         when(repositoryMock.findAll()).thenReturn(crops);
 
         Assert.assertEquals(testCropService.getAll().getClass(), crops);
@@ -47,7 +48,7 @@ public class CropServiceTest {
     @Test
     public void testCropByName(){
 
-        Crop newCrop = new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet");
+        Crop newCrop = new Crop(2.0, 2.0, 2.0, new Timestamp(12345), "Wiet");
         when(repositoryMock.findCropByName(anyString())).thenReturn(newCrop);
 
         Crop crop = testCropService.getCropByName("Wiet");
@@ -57,7 +58,7 @@ public class CropServiceTest {
 
     @Test
     public void testCreate(){
-        Crop crop = new Crop(2.0, 2.0, 2.0, new Date(12345), "Wiet");
+        Crop crop = new Crop(2.0, 2.0, 2.0, new Timestamp(12345), "Wiet");
         testCropService.createCrop(crop);
         Mockito.verify(repositoryMock).save(crop);
     }

@@ -2,6 +2,7 @@ package be.pxl.Models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -29,9 +30,9 @@ public class Crop implements Serializable {
     private double light;
 
     @Column(name="finaldate")
-    private Date finalDate;
+    private Timestamp finalDate;
 
-    public Crop(double humidity, double temperature, double light, Date finalDate, String name) {
+    public Crop(double humidity, double temperature, double light, Timestamp finalDate, String name) {
         this.humidity = humidity;
         this.temperature = temperature;
         this.light = light;
@@ -74,11 +75,11 @@ public class Crop implements Serializable {
         this.light = light;
     }
 
-    public Date getFinalDate() {
+    public Timestamp getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(Date finalDate) {
+    public void setFinalDate(Timestamp finalDate) {
         this.finalDate = finalDate;
     }
 

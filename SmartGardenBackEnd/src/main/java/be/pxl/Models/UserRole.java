@@ -11,7 +11,10 @@ import javax.persistence.*;
 @Table(name="user_roles")
 public class UserRole {
 
-    public UserRole(String role) {
+    public UserRole(){}
+
+    public UserRole(String role, String username) {
+        this.username = username;
         this.role = role;
     }
 
@@ -22,6 +25,17 @@ public class UserRole {
 
     @Column(name="role")
     private String role;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Column(name="username")
+    private String username;
 
     @JsonIgnore
     @ManyToOne
