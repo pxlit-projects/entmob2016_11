@@ -40,10 +40,11 @@ public class UserController {
     public void addUser(@RequestBody User user){
         service.createUser(user);
     }
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteUser(@RequestBody String name){
-        service.deleteUser(name);
+    public void deleteUser(@RequestBody int id){
+        service.deleteUser(id);
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
