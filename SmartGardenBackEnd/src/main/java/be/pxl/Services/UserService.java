@@ -30,10 +30,13 @@ public class UserService implements IUserService {
     @Transactional
     public void createUser(User user){
         sender.sendMessage("User with username : " + user.getUsername() + " created at : " + LocalDateTime.now());
+
+        user = userRepository.save(user);
+
         for(UserRole userRole : user.getUserRoles()){
+            userRole.setUser(user);
             userRoleRepository.save(userRole);
         }
-        userRepository.save(user);
     }
     @Transactional
     public void deleteUser(int id) {

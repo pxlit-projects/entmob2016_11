@@ -10,5 +10,5 @@ public interface ICropService {
     void createCrop(Crop crop);
     Crop getCropByName(String name);
 
-    void deleteCrop(Crop crop);
+    void deleteCrop(int cropID);
 }

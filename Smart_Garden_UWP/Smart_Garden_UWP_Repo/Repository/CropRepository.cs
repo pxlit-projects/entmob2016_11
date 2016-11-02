@@ -39,7 +39,7 @@ namespace Smart_Garden_UWP_Repo.Repository
         {
             var baseUri = "crop/delete";
 
-            if (await JsonApiClientPostRequestWithCropObj(baseUri, crop))
+            if (await JsonApiClientDeleteRequestWithCropObj(baseUri, crop))
             {
                 return true;
             }
@@ -117,6 +117,36 @@ namespace Smart_Garden_UWP_Repo.Repository
 
                     StringContent stringContent = new StringContent(JsonConvert.SerializeObject(crop, new MyDateTimeConverter()), Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await client.PostAsync(baseUri, stringContent);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+
+        private async Task<Boolean> JsonApiClientDeleteRequestWithCropObj(String baseUri, Crop crop)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:9999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                    HttpResponseMessage response = await client.DeleteAsync(baseUri + "/" + crop.Id);
 
                     if (response.IsSuccessStatusCode)
                     {

@@ -38,7 +38,7 @@ namespace Smart_Garden_UWP_Repo.Repository
         {
             var baseUri = "user/delete";
 
-            if(await JsonApiClientPostRequestWithUserObj(baseUri, user))
+            if(await JsonApiClientDeleteRequestWithUserObj(baseUri, user))
             {
                 return true;
             }
@@ -127,6 +127,35 @@ namespace Smart_Garden_UWP_Repo.Repository
                 }
             }
             catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+
+        private async Task<Boolean> JsonApiClientDeleteRequestWithUserObj(String baseUri, User user)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:9999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                
+                    HttpResponseMessage response = await client.DeleteAsync(baseUri + "/" + user.Id);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
             }
