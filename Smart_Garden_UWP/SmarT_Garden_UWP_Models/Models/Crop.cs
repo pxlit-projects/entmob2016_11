@@ -12,7 +12,6 @@ namespace Smart_Garden_UWP_Models
     {
         [JsonProperty("id")]
         public int Id { get; set; }
-
         [JsonProperty("temperature")]
         public double Temperature { get; set; }
         [JsonProperty("humidity")]

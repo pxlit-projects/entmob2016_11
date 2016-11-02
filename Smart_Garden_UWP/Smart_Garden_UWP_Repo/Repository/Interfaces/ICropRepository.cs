@@ -13,7 +13,6 @@ namespace Smart_Garden_UWP_Repo.Repository.Interfaces
         Task<List<Crop>> getAllCrops();
         // Gets a crop by its name
         Task<Crop> getCropByName(String name);
-
         // Adds a crop to the database
         Task<Boolean> addCrop(Crop crop);
         // Deletes a crop from the database

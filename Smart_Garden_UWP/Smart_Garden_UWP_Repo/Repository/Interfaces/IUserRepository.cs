@@ -11,7 +11,6 @@ namespace Smart_Garden_UWP_Repo.Repository
         Task<User> getUserByUsername(String username);
         // Gets a list of all users
         Task<List<User>> getAllUsers();
-
         // Adds a user to the database
         Task<Boolean> addUser(User user);
         // Delets a user from the database

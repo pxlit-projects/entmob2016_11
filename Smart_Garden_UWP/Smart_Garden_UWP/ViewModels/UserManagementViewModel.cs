@@ -15,6 +15,7 @@ namespace Smart_Garden_UWP.ViewModels
         private UserService userService;
         private NavigationService navigationService;
 
+        #region Properties of the ViewModel
         private String password;
         public String Password
         {
@@ -128,6 +129,48 @@ namespace Smart_Garden_UWP.ViewModels
             }
         }
 
+        private User deleteUserObj;
+        public User DeleteUserObj
+        {
+            get
+            {
+                return deleteUserObj;
+            }
+            set
+            {
+                deleteUserObj = value;
+                NotifyPropertyChanged("DeleteUserObj");
+                Error = null;
+
+                if (DeleteUsername != null)
+                {
+                    DeleteUsername = null;
+                }
+            }
+        }
+
+        public List<string> userFilters = new List<string> { "No filter", "Admins", "Users" };
+
+        public List<String> UserFilters
+        {
+            get
+            {
+                return userFilters;
+            }
+        }
+
+        public List<string> roles = new List<string> { "ROLE_ADMIN", "ROLE_USER" };
+
+        public List<String> Roles
+        {
+            get
+            {
+                return roles;
+            }
+        }
+        #endregion
+
+        #region Helper methods
         private async void SelectionChanged()
         {
             if (Filter.Equals("No filter"))
@@ -155,32 +198,11 @@ namespace Smart_Garden_UWP.ViewModels
                 }
             }
         }
+        #endregion
 
-        private User deleteUserObj;
-        public User DeleteUserObj
-        {
-            get
-            {
-                return deleteUserObj;
-            }
-            set
-            {
-                deleteUserObj = value;
-                NotifyPropertyChanged("DeleteUserObj");
-                Error = null;
-
-                if (DeleteUsername != null)
-                {
-                    DeleteUsername = null;
-                }
-            }
-        }
-
+        #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public CustomCommand DeleteUserCommand { get; set; }
-        public CustomCommand AddUserCommand { get; set; }
-
+      
         protected void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
@@ -188,6 +210,7 @@ namespace Smart_Garden_UWP.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+        #endregion
 
         public UserManagementViewModel(UserService userService, NavigationService navigationService)
         {
@@ -199,6 +222,10 @@ namespace Smart_Garden_UWP.ViewModels
 
             LoadCommands();
         }
+
+        #region Commands section
+        public CustomCommand DeleteUserCommand { get; set; }
+        public CustomCommand AddUserCommand { get; set; }
 
         private void LoadCommands()
         {
@@ -256,25 +283,6 @@ namespace Smart_Garden_UWP.ViewModels
                 }
             }
         }
-
-        public List<string> userFilters = new List<string>{ "No filter", "Admins", "Users" };
-
-        public List<String> UserFilters
-        {
-            get
-            {
-                return userFilters;
-            }
-        }
-
-        public List<string> roles = new List<string> { "ROLE_ADMIN", "ROLE_USER" };
-
-        public List<String> Roles
-        {
-            get
-            {
-                return roles;
-            }
-        }
+        #endregion       
     } 
 }

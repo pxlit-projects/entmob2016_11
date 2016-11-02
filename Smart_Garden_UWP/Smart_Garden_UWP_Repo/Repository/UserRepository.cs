@@ -15,13 +15,16 @@ namespace Smart_Garden_UWP_Repo.Repository
 {
     public class UserRepository : IUserRepository
     {
+        #region Helper methods
         public string val(String userName, String userPassword)
         {
             string authInfo = userName + ":" + userPassword;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
             return authInfo;
         }
+        #endregion
 
+        #region Repository implementation
         public async Task<Boolean> addUser(User user)
         {
             var baseUri = "user/add";
@@ -73,8 +76,9 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return user;
         }
+        #endregion
 
-        // returns the json of the request
+        #region JsonApiClient Section
         private async Task<String> JsonApiClientGetRequest(String baseUri)
         {
             String json = null;
@@ -162,5 +166,6 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return false;
         }
+        #endregion
     }
 }

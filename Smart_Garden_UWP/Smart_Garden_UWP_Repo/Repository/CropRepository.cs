@@ -16,13 +16,16 @@ namespace Smart_Garden_UWP_Repo.Repository
 {
     public class CropRepository : ICropRepository
     {
+        #region Helper methods
         public string val(String userName, String userPassword)
         {
             string authInfo = userName + ":" + userPassword;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
             return authInfo;
         }
+        #endregion
 
+        #region Repository implementation
         public async Task<bool> addCrop(Crop crop)
         {
             var baseUri = "crop/add";
@@ -74,7 +77,9 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return crop;
         }
+        #endregion
 
+        #region JsonApiClient section
         private async Task<String> JsonApiClientGetRequest(String baseUri)
         {
             String json = null;
@@ -163,5 +168,6 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return false;
         }
+        #endregion
     }
 }
