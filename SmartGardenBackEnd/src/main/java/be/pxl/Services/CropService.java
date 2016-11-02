@@ -33,4 +33,9 @@ public class CropService implements ICropService {
         sender.sendMessage("Crop with name " + name+ " searched at : " + LocalDateTime.now());
         return repository.findCropByName(name);
     }
+
+    public void deleteCrop(Crop crop){
+        sender.sendMessage("Crop : " + crop.getName() + " deleted at : " + LocalDateTime.now());
+        repository.delete(crop);
+    }
 }

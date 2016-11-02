@@ -10,5 +10,9 @@ public interface IUserService {
     Iterable<User> getAllUsers();
     User findUserByUserName(String name);
     void updateUser(User user);
+
     void deleteUser(int id);
+
+    void deleteUser(User user);
+
 }

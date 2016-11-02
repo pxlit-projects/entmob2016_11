@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     DataContext="{Binding Source={StaticResource viewModelLocator}, Path=AdminViewModel}">
 
-    <Grid>
+    <Grid x:Name="pageGrid">
         <!-- SplitView is different for widths of the device -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -27,6 +27,8 @@
                                 Value="190"/>
                         <Setter Target="logOutCompactButton.Visibility"
                                 Value="Collapsed"/>
+                        <Setter Target="loggedInUser.Visibility"
+                                Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -37,6 +39,8 @@
                     <VisualState.Setters>
                         <Setter Target="adminSplitView.DisplayMode"
                                 Value="CompactInline"/>
+                        <Setter Target="logoutButton.Background"
+                                Value="#FF7C7575"/>
                         <Setter Target="adminSplitView.IsPaneOpen"
                                 Value="False"/>
                         <Setter Target="loggedInUser.Visibility"
@@ -70,27 +74,48 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <SplitView x:Name="adminSplitView">
+        <SplitView x:Name="adminSplitView" Foreground="White">
+            <SplitView.PaneBackground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF023802" Offset="1"/>
+                    <GradientStop Color="Black" Offset="0"/>
+                </LinearGradientBrush>
+            </SplitView.PaneBackground>
             <SplitView.Pane>
                 <StackPanel Orientation="Vertical" Margin="0,15,0,0">
                     <RelativePanel x:Name="loggedInUser" Padding="15">
                         <TextBlock Text="Logged in as:" x:Name="loggedInLabel"/>
-                        <TextBlock Text="{Binding User.Username}" x:Name="usernameLabel" RelativePanel.Below="loggedInLabel" RelativePanel.RightOf="loggedInLabel"/>
-                        <Button x:Name="logoutButton" Content="Log out" RelativePanel.Below="usernameLabel" RelativePanel.AlignLeftWith="usernameLabel"/>
+                        <Button RelativePanel.LeftOf="usernameLabel" RelativePanel.Below="loggedInLabel" RelativePanel.AlignLeftWithPanel="True" Background="#00000000" Height="65" Width="85" VerticalAlignment="Center">
+                            <SymbolIcon Symbol="ContactInfo" RenderTransformOrigin="0.5,0.5" ToolTipService.ToolTip="Settings" Foreground="White">
+                                <SymbolIcon.RenderTransform>
+                                    <CompositeTransform ScaleX="3.5" ScaleY="4"/>
+                                </SymbolIcon.RenderTransform>
+                            </SymbolIcon>
+                        </Button>
+                        <TextBlock Text="{Binding User.Username}" x:Name="usernameLabel" RelativePanel.Below="loggedInLabel" RelativePanel.RightOf="loggedInLabel" Margin="5,0,0,5"/>
+                        <Button x:Name="logoutButton" Content="Log out" RelativePanel.Below="usernameLabel" Background="#FF7C7575" RelativePanel.AlignLeftWith="usernameLabel" Command="{Binding LogOutCommand}" Foreground="White"/>
                     </RelativePanel>
-                    <Button Width="65" Margin="0,12,0,0" ToolTipService.ToolTip="Log out" x:Name="logOutCompactButton">
-                        <SymbolIcon Symbol="OtherUser"/>
+                    <Button Width="65" Margin="0,12,0,0" ToolTipService.ToolTip="Log out" x:Name="logOutCompactButton" Command="{Binding LogOutCommand}">
+                        <SymbolIcon Symbol="OtherUser" Foreground="White"/>
+                    </Button>
+                    <Button Width="190" x:Name="userManagementButton" Command="{Binding ShowUserManagementCommand}" Foreground="White" Background="#FF7C7575">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="People" ToolTipService.ToolTip="User Management" Width="50" Foreground="White"/>
+                            <TextBlock Text="Manage users" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Width="190" Name="cropManagementButton" Command="{Binding ShowCropManagementCommand}" Foreground="White" Background="#FF7C7575">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="World" ToolTipService.ToolTip="Crop Management" Width="50" Foreground="White"/>
+                            <TextBlock Text="Manage crops" Margin="5,0,0,0"/>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
             </SplitView.Pane>
-            <!-- Eventually replace SplitView.Content by a frame to load the different pages in -->
-            <SplitView.Content>
-                <RelativePanel HorizontalAlignment="Center">
-                    <TextBlock Text="Content comes here" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
-                </RelativePanel>
-            </SplitView.Content>
+            <!-- frame to load the different pages -->
+            <Frame x:Name="mainFrame"/>
         </SplitView>
 
-        <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" VerticalAlignment="Top" Width="{Binding ElementName=adminSplitView, Path=CompactPaneLength}"/>
+        <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" VerticalAlignment="Top" Background="#FF7C7575" Foreground="White" Width="{Binding ElementName=adminSplitView, Path=CompactPaneLength}" Click="HamburgerButton_Click"/>
     </Grid>
 </Page>

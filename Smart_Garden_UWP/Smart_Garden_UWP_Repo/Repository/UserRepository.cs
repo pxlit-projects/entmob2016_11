@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Diagnostics;
+using SmarT_Garden_UWP_Models.Models;
 
 namespace Smart_Garden_UWP_Repo.Repository
 {
@@ -20,14 +22,28 @@ namespace Smart_Garden_UWP_Repo.Repository
             return authInfo;
         }
 
-        public void addUser()
+        public async Task<Boolean> addUser(User user)
         {
-            throw new NotImplementedException();
+            var baseUri = "user/add";
+            
+            if(await JsonApiClientPostRequestWithUserObj(baseUri, user))
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public void deleteUser()
+        public async Task<Boolean> deleteUser(User user)
         {
-            throw new NotImplementedException();
+            var baseUri = "user/delete";
+
+            if(await JsonApiClientPostRequestWithUserObj(baseUri, user))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<List<User>> getAllUsers()
@@ -35,7 +51,7 @@ namespace Smart_Garden_UWP_Repo.Repository
             List<User> users = null;
             var baseUri = "http://localhost:9999/user";
 
-            String json = await DBClient(baseUri);
+            String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)
             {
                 users = JsonConvert.DeserializeObject<List<User>>(json);
@@ -49,7 +65,7 @@ namespace Smart_Garden_UWP_Repo.Repository
             User user = null;
             var baseUri = "http://localhost:9999/user/getByUsername/" + username;
 
-            String json = await DBClient(baseUri);
+            String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)
             {
                 user = JsonConvert.DeserializeObject<User>(json);
@@ -58,39 +74,64 @@ namespace Smart_Garden_UWP_Repo.Repository
             return user;
         }
 
-        //TODO FIX PROBLEM
-        public async Task<String> getUserRole(User user)
-        {
-            String role = null;
-            var baseUri = "http//localhost:9999/user/getRole/" + user.Username;
-
-            String json = await DBClient(baseUri);
-            if(json != null)
-            {
-                role = JsonConvert.DeserializeObject<String>(json);
-            }
-
-            return role;
-        }
-
-        private async Task<String> DBClient(String baseUri)
+        // returns the json of the request
+        private async Task<String> JsonApiClientGetRequest(String baseUri)
         {
             String json = null;
 
-            using (var client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri(baseUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = await client.GetAsync(baseUri);
-                if (response.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    json = await response.Content.ReadAsStringAsync();
-                }
+                    client.BaseAddress = new Uri(baseUri);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var response = await client.GetAsync(baseUri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        json = await response.Content.ReadAsStringAsync();
+                    }
 
-                return json;
+                    return json;
+                }
             }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return null;
+        }
+
+        private async Task<Boolean> JsonApiClientPostRequestWithUserObj(String baseUri, User user)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:9999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync(baseUri, stringContent);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return false;
         }
     }
 }

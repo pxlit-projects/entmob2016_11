@@ -110,6 +110,7 @@
     <Compile Include="Models\Crop.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\SmarT_Garden_UWP_Models.rd.xml" />
   </ItemGroup>

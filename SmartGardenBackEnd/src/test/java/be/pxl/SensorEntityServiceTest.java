@@ -57,40 +57,18 @@ public class SensorEntityServiceTest {
         when(repositoryMock.findOne(anyInt())).thenReturn(new SensorEntity(1.0, 1.0, 1.0, null, false));
 
         SensorEntity sTag = testSensorService.getEntityById(0);
-        boolean eq = false;
-        if(sTag.getHumidity() == 1.0 && sTag.getLight() == 1.0 && sTag.getTemperature() == 1.0 && !sTag.isAbove()){
-            eq = true;
-        }
 
-        Assert.assertTrue(eq);
+        Assert.assertEquals(sTag.getClass(), SensorEntity.class);
     }
 
     @Test
     public void testFindAll(){
 
-        boolean eq = false;
-        int index = 0;
-        SensorEntity current;
         List<SensorEntity> sensorValues = new ArrayList<>();
         sensorValues.add(new SensorEntity(1.0, 1.0, 1.0, null, false));
         when(repositoryMock.findAll()).thenReturn(sensorValues);
 
-        Iterator i = testSensorService.getAll().iterator();
-
-        while(i.hasNext()){
-            current = (SensorEntity) i.next();
-            if(current.getHumidity() == sensorValues.get(index).getHumidity()
-                    && current.getLight() == sensorValues.get(index).getLight()
-                    && current.getTemperature() == sensorValues.get(index).getTemperature()
-                    && current.isAbove() == sensorValues.get(index).isAbove()){
-                eq = true;
-            }else{
-                eq = false;
-            }
-            index++;
-        }
-
-        Assert.assertTrue(eq);
+        Assert.assertEquals(testSensorService.getAll().getClass(), sensorValues.getClass());
 
     }
 

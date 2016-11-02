@@ -54,43 +54,27 @@ public class UserServiceTest {
 
     @Test
     public void testDelete(){
-        testUserService.deleteUser("john");
-        verify(repositoryMock).deleteByusername("john");
+        User testUser = new User("john", "123456");
+        testUserService.deleteUser(testUser);
+        verify(repositoryMock).delete(testUser);
 
     }
 
     @Test
     public void testFindOne(){
         when(repositoryMock.findByusername(anyString())).thenReturn(testUser);
-        User john = testUserService.findUserByUserName("john");
-        Assert.assertEquals(john.getUsername(), testUser.getUsername());
+        Assert.assertEquals(testUserService.findUserByUserName("john").getClass(), User.class);
 
     }
 
     @Test
     public void testFindAll(){
 
-        boolean eq = false;
-        int index = 0;
-        User current;
         List<User> users = new ArrayList<>();
         users.add(testUser);
         when(repositoryMock.findAll()).thenReturn(users);
 
-        Iterator i = testUserService.getAllUsers().iterator();
-
-        while(i.hasNext()){
-            current = (User) i.next();
-            if((current.getPassword()).equals(users.get(index).getPassword())
-                    && current.getUsername() == users.get(index).getUsername()){
-                eq = true;
-            }else{
-                eq = false;
-            }
-            index++;
-        }
-
-        Assert.assertTrue(eq);
+        Assert.assertEquals(testUserService.getAllUsers().getClass(), users.getClass());
 
     }
 

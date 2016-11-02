@@ -43,8 +43,13 @@ public class UserController {
 
     @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteUser(@RequestBody int id){
+    public void deleteUser(@RequestBody int id) {
         service.deleteUser(id);
+    }
+
+    public void deleteUser(@RequestBody User user){
+        service.deleteUser(user);
+
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.PUT)

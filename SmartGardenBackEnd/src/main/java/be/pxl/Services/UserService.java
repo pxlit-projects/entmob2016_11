@@ -26,9 +26,15 @@ public class UserService implements IUserService {
         sender.sendMessage("User with username : " + user.getUsername() + " created at : " + LocalDateTime.now());
         repository.save(user);
     }
-    public void deleteUser(int id){
+
+    public void deleteUser(int id) {
         sender.sendMessage("User with id : " + id + " deleted at : " + LocalDateTime.now());
         repository.delete(id);
+    }
+
+    public void deleteUser(User user){
+        sender.sendMessage("User with name : " + user.getUsername() + " deleted at : " + LocalDateTime.now());
+        repository.delete(user);
     }
     public Iterable<User> getAllUsers(){
         sender.sendMessage("Searched all users at : " + LocalDateTime.now());

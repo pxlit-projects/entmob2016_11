@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 
@@ -28,8 +29,11 @@ public class App
     {
         SpringApplication.run(App.class, args);
     }
+    @Resource
+    private DataSource dataSource;
+
     @Autowired
-    DataSource dataSource;
+    private Receiver receiver;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
