@@ -32,8 +32,6 @@ public class App
     @Resource
     private DataSource dataSource;
 
-    @Autowired
-    private Receiver receiver;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,10 +44,5 @@ public class App
                         "select username, role from user_roles where username=?");
 
     }
-    @Autowired
-    public void configure(DefaultJmsListenerContainerFactory fact){
-        fact.setPubSubDomain(true);
-    }
-
 }
 
