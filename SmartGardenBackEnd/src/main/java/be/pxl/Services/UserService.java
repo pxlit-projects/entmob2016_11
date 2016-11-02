@@ -2,10 +2,12 @@ package be.pxl.Services;
 
 import be.pxl.Logger.Sender;
 import be.pxl.Models.User;
+import be.pxl.Models.UserRole;
 import be.pxl.Repositories.UserRepository;
 import be.pxl.Repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -25,12 +27,15 @@ public class UserService implements IUserService {
 
     @Autowired
     Sender sender;
-
+    @Transactional
     public void createUser(User user){
         sender.sendMessage("User with username : " + user.getUsername() + " created at : " + LocalDateTime.now());
+        for(UserRole userRole : user.getUserRoles()){
+            userRoleRepository.save(userRole);
+        }
         userRepository.save(user);
     }
-
+    @Transactional
     public void deleteUser(int id) {
         sender.sendMessage("User with id : " + id + " deleted at : " + LocalDateTime.now());
         userRoleRepository.deleteByUserId(id);
