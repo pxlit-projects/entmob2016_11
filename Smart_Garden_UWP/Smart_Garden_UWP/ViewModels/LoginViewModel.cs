@@ -12,6 +12,7 @@ namespace Smart_Garden_UWP.ViewModels
         private UserService userService;
         private NavigationService navigationService;
 
+        #region Properties of the viewmodel
         private String username;
         public String Username
         {
@@ -43,7 +44,9 @@ namespace Smart_Garden_UWP.ViewModels
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
+        #endregion 
 
+        #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged(String info)
@@ -53,8 +56,9 @@ namespace Smart_Garden_UWP.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+        #endregion
 
-        public CustomCommand LoginCommand { get; set; }
+        
 
         public LoginViewModel(UserService userService, NavigationService navigationService)
         {
@@ -62,6 +66,9 @@ namespace Smart_Garden_UWP.ViewModels
             this.userService = userService;
             this.navigationService = navigationService;
         }
+
+        #region Commands Section
+        public CustomCommand LoginCommand { get; set; }
 
         private void LoadCommands()
         {
@@ -95,7 +102,9 @@ namespace Smart_Garden_UWP.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region Helper methods
         private Boolean checkLogin(User user)
         {
             if(user != null && user.Password.Equals(Password))
@@ -105,5 +114,6 @@ namespace Smart_Garden_UWP.ViewModels
 
             return false;
         }
+        #endregion
     }
 }

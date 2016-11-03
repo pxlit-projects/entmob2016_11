@@ -15,6 +15,7 @@ namespace Smart_Garden_UWP.ViewModels
         private CropService cropService;
         private NavigationService navigationService;
 
+        #region Properties of the ViewModel
         private String deleteCropName;
         public String DeleteCropName
         {
@@ -150,6 +151,7 @@ namespace Smart_Garden_UWP.ViewModels
                 Error = null;
             }
         }
+        #endregion
 
         public CropSettingsViewModel(CropService cropService, NavigationService navigationService)
         {
@@ -158,6 +160,11 @@ namespace Smart_Garden_UWP.ViewModels
 
             LoadCommands();
         }
+
+        #region Commands section
+        public CustomCommand DeleteCropCommand { get; set; }
+        public CustomCommand AddCropCommand { get; set; }
+        public CustomCommand GetAllCropsCommand { get; set; }
 
         private void LoadCommands()
         {
@@ -210,12 +217,10 @@ namespace Smart_Garden_UWP.ViewModels
         {
             return true;
         }
+        #endregion
 
+        #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public CustomCommand DeleteCropCommand { get; set; }
-        public CustomCommand AddCropCommand { get; set; }
-        public CustomCommand GetAllCropsCommand { get; set; }
 
         protected void NotifyPropertyChanged(String info)
         {
@@ -224,7 +229,6 @@ namespace Smart_Garden_UWP.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
-
-        
+        #endregion
     }
 }

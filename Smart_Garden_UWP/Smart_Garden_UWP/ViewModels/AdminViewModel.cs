@@ -13,6 +13,7 @@ namespace Smart_Garden_UWP.ViewModels
         private NavigationService navigationService;
         private User user;
 
+        #region Properties of the ViewModel
         public User User
         {
             get
@@ -26,13 +27,11 @@ namespace Smart_Garden_UWP.ViewModels
                 NotifyPropertyChanged("User");
             }
         }
+        #endregion
 
+        #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public CustomCommand LogOutCommand { get; set; }
-        public CustomCommand ShowUserManagementCommand { get; set; }
-        public CustomCommand ShowCropManagementCommand { get; set; }
-
+       
         protected void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
@@ -40,6 +39,7 @@ namespace Smart_Garden_UWP.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+        #endregion
 
         public AdminViewModel(UserService userService, NavigationService navigationService, CropService cropService)
         {
@@ -51,6 +51,11 @@ namespace Smart_Garden_UWP.ViewModels
 
             LoadCommands();
         }
+
+        #region Commands Section
+        public CustomCommand LogOutCommand { get; set; }
+        public CustomCommand ShowUserManagementCommand { get; set; }
+        public CustomCommand ShowCropManagementCommand { get; set; }
 
         private void LoadCommands()
         {
@@ -78,10 +83,13 @@ namespace Smart_Garden_UWP.ViewModels
         {
             navigationService.NavigateTo("Logout");
         }
+        #endregion
 
+        #region Messenger Section
         private void OnUserReceived(User user)
         {
             User = user;
         }
+        #endregion
     }
 }

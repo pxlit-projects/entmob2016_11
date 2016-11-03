@@ -15,13 +15,16 @@ namespace Smart_Garden_UWP_Repo.Repository
 {
     public class UserRepository : IUserRepository
     {
+        #region Helper methods
         public string val(String userName, String userPassword)
         {
             string authInfo = userName + ":" + userPassword;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
             return authInfo;
         }
+        #endregion
 
+        #region Repository implementation
         public async Task<Boolean> addUser(User user)
         {
             var baseUri = "user/add";
@@ -38,7 +41,7 @@ namespace Smart_Garden_UWP_Repo.Repository
         {
             var baseUri = "user/delete";
 
-            if(await JsonApiClientPostRequestWithUserObj(baseUri, user))
+            if(await JsonApiClientDeleteRequestWithUserObj(baseUri, user))
             {
                 return true;
             }
@@ -73,8 +76,9 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return user;
         }
+        #endregion
 
-        // returns the json of the request
+        #region JsonApiClient Section
         private async Task<String> JsonApiClientGetRequest(String baseUri)
         {
             String json = null;
@@ -133,5 +137,35 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return false;
         }
+
+        private async Task<Boolean> JsonApiClientDeleteRequestWithUserObj(String baseUri, User user)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:9999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                
+                    HttpResponseMessage response = await client.DeleteAsync(baseUri + "/" + user.Id);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+        #endregion
     }
 }

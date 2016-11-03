@@ -14,6 +14,7 @@ namespace Smart_Garden_UWP.ViewModels
         private SensorService sensorService;
         private User user;
 
+        #region Properties of the viewmodel
         public User User
         {
             get
@@ -27,11 +28,11 @@ namespace Smart_Garden_UWP.ViewModels
                 NotifyPropertyChanged("User");
             }
         }
+        #endregion
 
+        #region INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public CustomCommand LogOutCommand { get; set; }
-
+     
         protected void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
@@ -39,6 +40,7 @@ namespace Smart_Garden_UWP.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+        #endregion
 
         public StatisticsViewModel(UserService userService, NavigationService navigationService, CropService cropService, SensorService sensorService)
         {
@@ -50,10 +52,13 @@ namespace Smart_Garden_UWP.ViewModels
             LoadCommands();
         }
 
+        #region Commands section
         private void LoadCommands()
         {
             LogOutCommand = new CustomCommand(LogOut, CanLogOut);
         }
+
+        public CustomCommand LogOutCommand { get; set; }
 
         private bool CanLogOut(object obj)
         {
@@ -64,5 +69,6 @@ namespace Smart_Garden_UWP.ViewModels
         {
             navigationService.NavigateTo("Logout");
         }
+        #endregion
     }
 }

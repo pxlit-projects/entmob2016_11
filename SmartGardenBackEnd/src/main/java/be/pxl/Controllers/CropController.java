@@ -37,10 +37,9 @@ public class CropController {
         service.createCrop(crop);
     }
 
-    @RequestMapping(value="/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public void deleteCrop(@RequestBody Crop crop) {
-        service.deleteCrop(crop);
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+    public void deleteCrop(@PathVariable(value="id") int cropID) {
+        service.deleteCrop(cropID);
     }
 
 }

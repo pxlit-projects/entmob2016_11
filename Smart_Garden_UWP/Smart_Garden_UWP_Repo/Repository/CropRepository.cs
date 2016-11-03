@@ -16,13 +16,16 @@ namespace Smart_Garden_UWP_Repo.Repository
 {
     public class CropRepository : ICropRepository
     {
+        #region Helper methods
         public string val(String userName, String userPassword)
         {
             string authInfo = userName + ":" + userPassword;
             authInfo = Convert.ToBase64String(Encoding.UTF8.GetBytes(authInfo));
             return authInfo;
         }
+        #endregion
 
+        #region Repository implementation
         public async Task<bool> addCrop(Crop crop)
         {
             var baseUri = "crop/add";
@@ -39,7 +42,7 @@ namespace Smart_Garden_UWP_Repo.Repository
         {
             var baseUri = "crop/delete";
 
-            if (await JsonApiClientPostRequestWithCropObj(baseUri, crop))
+            if (await JsonApiClientDeleteRequestWithCropObj(baseUri, crop))
             {
                 return true;
             }
@@ -74,7 +77,9 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return crop;
         }
+        #endregion
 
+        #region JsonApiClient section
         private async Task<String> JsonApiClientGetRequest(String baseUri)
         {
             String json = null;
@@ -133,5 +138,36 @@ namespace Smart_Garden_UWP_Repo.Repository
 
             return false;
         }
+
+        private async Task<Boolean> JsonApiClientDeleteRequestWithCropObj(String baseUri, Crop crop)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:9999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("mkyong", "123456")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                    HttpResponseMessage response = await client.DeleteAsync(baseUri + "/" + crop.Id);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+        #endregion
     }
 }
