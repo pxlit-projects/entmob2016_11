@@ -27,6 +27,8 @@ public class UserService implements IUserService {
 
     @Autowired
     Sender sender;
+
+
     @Transactional
     public void createUser(User user){
         sender.sendMessage("User with username : " + user.getUsername() + " created at : " + LocalDateTime.now());
