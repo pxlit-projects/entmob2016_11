@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{702350DF-7364-4B2E-A392-E3293808B5EA}</ProjectGuid>
+    <ProjectGuid>{CE84E6AB-B3E7-4852-8849-EDE616EBD079}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Smart_Garden_UWP</RootNamespace>
-    <AssemblyName>Smart_Garden_UWP</AssemblyName>
+    <RootNamespace>Smart_Garden_UWP.Tests</RootNamespace>
+    <AssemblyName>Smart_Garden_UWP.Tests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -16,7 +16,8 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Smart_Garden_UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Smart_Garden_UWP.Tests_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <UnitTestPlatformVersion Condition="'$(UnitTestPlatformVersion)' == ''">14.0</UnitTestPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -88,57 +89,34 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
     <None Include="project.json" />
+    <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Converter\DateTimeToDateTimeOffsetConverter.cs" />
-    <Compile Include="Extensions\ListExtensions.cs" />
-    <Compile Include="Pages\AdminPage.xaml.cs">
-      <DependentUpon>AdminPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\CropSettingsPage.xaml.cs">
-      <DependentUpon>CropSettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\StatisticsPage.xaml.cs">
-      <DependentUpon>StatisticsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UserManagementPage.xaml.cs">
-      <DependentUpon>UserManagementPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CropService.cs" />
-    <Compile Include="Services\Interfaces\ICropService.cs" />
-    <Compile Include="Services\Interfaces\INavigationService.cs" />
-    <Compile Include="Services\Interfaces\IUserService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\UserService.cs" />
-    <Compile Include="Utilities\CustomCommand.cs" />
-    <Compile Include="Utilities\Messenger.cs" />
-    <Compile Include="ViewModelLocator.cs" />
-    <Compile Include="ViewModels\AdminViewModel.cs" />
-    <Compile Include="ViewModels\CropSettingsViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\StatisticsViewModel.cs" />
-    <Compile Include="ViewModels\UserManagementViewModel.cs" />
+    <Compile Include="Tests\AdminViewModelTest.cs" />
+    <Compile Include="Tests\CropSettingsViewModelTest.cs" />
+    <Compile Include="Tests\UserManagementViewModelTest.cs" />
+    <Compile Include="UnitTestApp.xaml.cs">
+      <DependentUpon>UnitTestApp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\LoginViewModelTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="UnitTestApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Smart_Garden_UWP_TemporaryKey.pfx" />
+    <None Include="Smart_Garden_UWP.Tests_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\cropSettings.jpg" />
-    <Content Include="Assets\garden_userManagement.jpg" />
-    <Content Include="Assets\smartgarden_background.jpg" />
-    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Properties\UnitTestApp.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -148,32 +126,13 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="Pages\AdminPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\CropSettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\StatisticsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\UserManagementPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Smart_Garden_UWP\Smart_Garden_UWP.csproj">
+      <Project>{702350df-7364-4b2e-a392-e3293808b5ea}</Project>
+      <Name>Smart_Garden_UWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmarT_Garden_UWP_Models\SmarT_Garden_UWP_Models.csproj">
       <Project>{d4dcaf81-9b24-4404-8edc-440718eb3f0b}</Project>
       <Name>SmarT_Garden_UWP_Models</Name>

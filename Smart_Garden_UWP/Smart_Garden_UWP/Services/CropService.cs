@@ -1,4 +1,5 @@
-﻿using Smart_Garden_UWP_Models;
+﻿using Smart_Garden_UWP.Services.Interfaces;
+using Smart_Garden_UWP_Models;
 using Smart_Garden_UWP_Repo.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Smart_Garden_UWP.Services
 {
-    public class CropService
+    public class CropService : ICropService
     {
         private CropRepository cropRepository = new CropRepository();
 

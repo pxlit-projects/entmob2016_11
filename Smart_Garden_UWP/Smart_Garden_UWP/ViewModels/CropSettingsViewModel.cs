@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Smart_Garden_UWP.Services;
 using System.ComponentModel;
 using Smart_Garden_UWP_Models;
 using Smart_Garden_UWP.Utilities;
+using Smart_Garden_UWP.Services.Interfaces;
 
 namespace Smart_Garden_UWP.ViewModels
 {
     public class CropSettingsViewModel : INotifyPropertyChanged
     {
-        private CropService cropService;
-        private NavigationService navigationService;
+        private ICropService cropService;
+        private INavigationService navigationService;
 
         #region Properties of the ViewModel
         private String deleteCropName;
@@ -153,7 +150,7 @@ namespace Smart_Garden_UWP.ViewModels
         }
         #endregion
 
-        public CropSettingsViewModel(CropService cropService, NavigationService navigationService)
+        public CropSettingsViewModel(ICropService cropService, INavigationService navigationService)
         {
             this.cropService = cropService;
             this.navigationService = navigationService;

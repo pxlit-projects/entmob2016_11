@@ -1,4 +1,4 @@
-﻿using Smart_Garden_UWP.Services;
+﻿using Smart_Garden_UWP.Services.Interfaces;
 using Smart_Garden_UWP.Utilities;
 using Smart_Garden_UWP_Models;
 using System;
@@ -8,9 +8,9 @@ namespace Smart_Garden_UWP.ViewModels
 {
     public class AdminViewModel : INotifyPropertyChanged
     {
-        private UserService userService;
-        private CropService cropService;
-        private NavigationService navigationService;
+        private IUserService userService;
+        private ICropService cropService;
+        private INavigationService navigationService;
         private User user;
 
         #region Properties of the ViewModel
@@ -41,7 +41,7 @@ namespace Smart_Garden_UWP.ViewModels
         }
         #endregion
 
-        public AdminViewModel(UserService userService, NavigationService navigationService, CropService cropService)
+        public AdminViewModel(IUserService userService, INavigationService navigationService, ICropService cropService)
         {
             this.userService = userService;
             this.navigationService = navigationService;
