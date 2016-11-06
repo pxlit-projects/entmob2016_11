@@ -2,7 +2,9 @@ package be.pxl;
 
 import be.pxl.Logger.Sender;
 import be.pxl.Models.User;
+import be.pxl.Models.UserRole;
 import be.pxl.Repositories.UserRepository;
+import be.pxl.Repositories.UserRoleRepository;
 import be.pxl.Services.UserService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,10 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import org.springframework.dao.RecoverableDataAccessException;
 
-import java.util.ArrayList;
-
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -34,6 +33,9 @@ public class UserServiceTest {
     private UserRepository repositoryMock;
 
     @Mock
+    private UserRoleRepository userRoleRepositoryMock;
+
+    @Mock
     private Sender senderMock;
 
     @InjectMocks
@@ -44,12 +46,18 @@ public class UserServiceTest {
     @Before
     public void init(){
         testUser = new User("john", "123456");
+        Set<UserRole> roles = new HashSet<>();
+        roles.add(new UserRole("ROLE_ADMIN", "john"));
+        testUser.setId(1);
+        testUser.setUserRoles(roles);
     }
 
     @Test
     public void testCreate(){
+        when(repositoryMock.save(testUser)).thenReturn(testUser);
         testUserService.createUser(testUser);
         verify(repositoryMock).save(testUser);
+        verify(userRoleRepositoryMock).save((UserRole)(testUser.getUserRoles().toArray())[0]);
     }
 
     @Test
@@ -63,7 +71,7 @@ public class UserServiceTest {
     @Test
     public void testFindOne(){
         when(repositoryMock.findByusername(anyString())).thenReturn(testUser);
-        Assert.assertEquals(testUserService.findUserByUserName("john").getClass(), User.class);
+        Assert.assertSame(testUserService.findUserByUserName("john"), testUser);
 
     }
 
@@ -74,7 +82,7 @@ public class UserServiceTest {
         users.add(testUser);
         when(repositoryMock.findAll()).thenReturn(users);
 
-        Assert.assertEquals(testUserService.getAllUsers().getClass(), users.getClass());
+        Assert.assertSame(testUserService.getAllUsers(), users);
 
     }
 
