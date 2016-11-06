@@ -94,6 +94,10 @@
     <SDKReference Include="TestPlatform.Universal, Version=$(UnitTestPlatformVersion)" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\MockCropRepository.cs" />
+    <Compile Include="Mocks\MockCropService.cs" />
+    <Compile Include="Mocks\MockUserRepository.cs" />
+    <Compile Include="Mocks\MockUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AdminViewModelTest.cs" />
     <Compile Include="Tests\CropSettingsViewModelTest.cs" />
@@ -113,7 +117,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Smart_Garden_UWP.Tests_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\UnitTestApp.rd.xml" />

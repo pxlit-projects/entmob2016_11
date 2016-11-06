@@ -26,6 +26,16 @@ namespace Smart_Garden_UWP.Tests
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
+        private ViewModelLocator vmlocator;
+
+        public ViewModelLocator ViewModelLocator
+        {
+            get { return vmlocator; }
+        }
+
+
+
         public App()
         {
             this.InitializeComponent();
@@ -54,7 +64,7 @@ namespace Smart_Garden_UWP.Tests
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                rootFrame = new Frame { DataContext = ViewModelLocator.LoginViewModel };
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 

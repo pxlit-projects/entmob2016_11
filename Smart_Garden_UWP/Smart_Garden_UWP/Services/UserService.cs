@@ -9,7 +9,13 @@ namespace Smart_Garden_UWP.Services
 {
     public class UserService : IUserService
     {
-        private UserRepository userRepository = new UserRepository();
+
+        IUserRepository userRepository;
+
+        public UserService(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
 
         public async Task<List<User>> getAllUsers()
         {

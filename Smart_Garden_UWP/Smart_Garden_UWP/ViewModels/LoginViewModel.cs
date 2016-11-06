@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using Smart_Garden_UWP_Models;
 using Smart_Garden_UWP.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace Smart_Garden_UWP.ViewModels
 {
@@ -83,6 +84,7 @@ namespace Smart_Garden_UWP.ViewModels
 
         private async void Login(object obj)
         {
+            
             User user = await userService.getUserByUsername(Username);
 
             if (checkLogin(user))
@@ -97,7 +99,9 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     navigationService.NavigateTo("User");
                 }
+                
             }
+
         }
         #endregion
 
@@ -110,6 +114,18 @@ namespace Smart_Garden_UWP.ViewModels
             }
 
             return false;
+        }
+
+        //ONLY FOR TESTING
+        public async Task<User> testForLogin()
+        {
+            User user = await userService.getUserByUsername(Username);
+            if (checkLogin(user))
+            {
+                return user;
+            }
+
+            return null;
         }
         #endregion
     }
