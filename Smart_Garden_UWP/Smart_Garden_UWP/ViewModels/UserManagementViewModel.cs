@@ -259,6 +259,8 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     Error = "Error bij het toevoegen van de user. Probeer het later opnieuw!";
                 }
+
+                NotifyPropertyChanged("UsersList");
             }
         }
 
@@ -281,6 +283,8 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     Error = "Error bij het verwijderen van de user. Probeer het later opnieuw!";
                 }
+
+                NotifyPropertyChanged("UsersList");
             }
         }
         #endregion 
