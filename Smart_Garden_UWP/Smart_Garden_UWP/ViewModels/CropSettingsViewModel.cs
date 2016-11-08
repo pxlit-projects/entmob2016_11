@@ -205,7 +205,7 @@ namespace Smart_Garden_UWP.ViewModels
             }
         }
 
-        private async void GetAllCrops(object obj)
+        public async void GetAllCrops(object obj)
         {
             CropList = await cropService.getAllCrops();
         }
