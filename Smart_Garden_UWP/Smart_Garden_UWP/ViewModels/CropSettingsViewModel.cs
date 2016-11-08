@@ -184,6 +184,8 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     Error = "Error bij het verwijderen van het gewas. Probeer het later opnieuw!";
                 }
+
+                NotifyPropertyChanged("CropList");
             }
         }
 
@@ -202,6 +204,8 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     Error = "Error bij het toevoegen van het gewas. Probeer het later opnieuw!";
                 }
+
+                NotifyPropertyChanged("CropList");
             }
         }
 
