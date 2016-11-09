@@ -19,62 +19,67 @@
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="WideCropSettings">
+                <VisualState x:Name="Wide">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="900"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="addCropLabel.RelativePanel.RightOf"
+                        <Setter Target="addCropLabel.(RelativePanel.RightOf)"
                                 Value="getAllCropsButton"/>
-                        <Setter Target="addCropLabel.RelativePanel.Below"
+                        <Setter Target="addCropLabel.(RelativePanel.Below)"
                                 Value="title"/>
+                        <Setter Target="deleteCropLabel.(RelativePanel.Below)"
+                                Value="addCropButton"/>
+                        <Setter Target="deleteCropLabel.(RelativePanel.RightOf)"
+                                Value="getAllCropsButton"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
-        <RelativePanel>
-            <TextBlock Text="Crop Management" Foreground="BlanchedAlmond" FontSize="25" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Center" x:Name="title"/>
-            <TextBlock Text="{Binding Error}" Foreground="Red" RelativePanel.Below="title" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Center" x:Name="errorLabel"/>
-            <ListView x:Name="cropListView" ItemsSource="{Binding CropList}" RelativePanel.Below="errorLabel" Margin="25,0,0,0" DataFetchSize="5" SelectedItem="{Binding DeleteCrop, Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="20,0,0,0" FontSize="18" Width="90" Foreground="Wheat"/>
-                                <TextBlock Text="Recommended temperature:" Foreground="Wheat"/>
-                                <TextBlock Text="{Binding Temperature}" Foreground="Wheat"/>
-                                <TextBlock Text="Recommended humidity" Foreground="Wheat"/>
-                                <TextBlock Text="{Binding Humidity}" Foreground="Wheat"/>
-                                <TextBlock Text="Recommended time of year to plant:" Foreground="Wheat"/>
-                                <TextBlock Text="{Binding FinalDate}" Foreground="Wheat"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <RelativePanel>
+                <TextBlock Text="Crop Management" Foreground="BlanchedAlmond" FontSize="25" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Center" x:Name="title"/>
+                <TextBlock Text="{Binding Error}" Foreground="Red" RelativePanel.Below="title" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" HorizontalAlignment="Center" x:Name="errorLabel"/>
+                <ListView x:Name="cropListView" ItemsSource="{Binding CropList}" RelativePanel.Below="errorLabel" Margin="25,0,0,0" DataFetchSize="5" SelectedItem="{Binding DeleteCrop, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="10,5,0,5" Width="300">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="20,0,0,0" FontSize="18" Width="90" Foreground="Wheat"/>
+                                    <TextBlock Text="Recommended temperature:" Foreground="Wheat"/>
+                                    <TextBlock Text="{Binding Temperature}" Foreground="Wheat"/>
+                                    <TextBlock Text="Recommended humidity" Foreground="Wheat"/>
+                                    <TextBlock Text="{Binding Humidity}" Foreground="Wheat"/>
+                                    <TextBlock Text="Recommended time of year to plant:" Foreground="Wheat"/>
+                                    <TextBlock Text="{Binding FinalDate}" Foreground="Wheat"/>
+                                </StackPanel>
+                                <Button Margin="10,0,0,0" Background="#00000000" Command="{Binding ElementName=cropListView, Path=DataContext.DeleteCropCommand}" Foreground="Wheat">
+                                    <SymbolIcon Symbol="Delete"/>
+                                </Button>
                             </StackPanel>
-                            <Button Margin="10,0,0,0" Background="#00000000" Command="{Binding ElementName=cropListView, Path=DataContext.DeleteCropCommand}" Foreground="Wheat">
-                                <SymbolIcon Symbol="Delete"/>
-                            </Button>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button Name="getAllCropsButton" Content="Get All Crops" Foreground="Wheat" RelativePanel.Below="cropListView" Margin="25,0,0,0" Command="{Binding GetAllCropsCommand}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Name="getAllCropsButton" Content="Get All Crops" Foreground="Wheat" RelativePanel.Below="cropListView" Margin="25,0,250,0" Command="{Binding GetAllCropsCommand}"/>
 
-            <TextBlock Text="Add a crop" Name="addCropLabel" RelativePanel.Below="getAllCropsButton" Margin="25,20,0,0" Foreground="Wheat"/>
-            <TextBlock Text="Cropname:" Name="cropNameTextBlock" RelativePanel.Below="addCropLabel" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
-            <TextBox Text="{Binding CropName, Mode=TwoWay}" Name="cropTextBox" RelativePanel.RightOf="cropNameTextBlock" Margin="62,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="cropNameTextBlock" Width="150"/>
-            <TextBlock Text="Temperature:" Name="temperatureTextBlock" RelativePanel.Below="cropNameTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
-            <TextBox Text="{Binding Temperature, Mode=TwoWay}" Name="temperatureTextBox"  RelativePanel.RightOf="temperatureTextBlock" Margin="47,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="temperatureTextBlock" Width="150"/>
-            <TextBlock Text="Humidity:" Name="humidityTextBlock" RelativePanel.Below="temperatureTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
-            <TextBox Text="{Binding Humidity,Mode=TwoWay}" Name="humidityTextBox"  RelativePanel.RightOf="humidityTextBlock" Margin="70,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="humidityTextBlock" Width="150"/>
-            <TextBlock Text="Light:" Name="lightTextBlock" RelativePanel.Below="humidityTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
-            <TextBox Text="{Binding Light,Mode=TwoWay}" Name="lightTextBox"  RelativePanel.RightOf="lightTextBlock" Margin="97,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="lightTextBlock" Width="150"/>
-            <TextBlock Text="Time of the year" Name="finalDateTextBlock" RelativePanel.Below="lightTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
-            <DatePicker Date="{Binding TimeOfYear, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}" Name="timeOfYearDatePicker"  RelativePanel.RightOf="finalDateTextBlock" Margin="25,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="finalDateTextBlock"/>
-            <Button Content="Add crop" Name="addCropButton" Command="{Binding AddCropCommand}" RelativePanel.Below="finalDateTextBlock" Margin="25,5,0,0" Foreground="Wheat" RelativePanel.AlignLeftWith="addCropLabel" />
+                <TextBlock Text="Add a crop" Name="addCropLabel" RelativePanel.Below="getAllCropsButton" Margin="25,20,0,0" Foreground="Wheat"/>
+                <TextBlock Text="Cropname:" Name="cropNameTextBlock" RelativePanel.Below="addCropLabel" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
+                <TextBox Text="{Binding CropName, Mode=TwoWay}" Name="cropTextBox" RelativePanel.RightOf="cropNameTextBlock" Margin="62,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="cropNameTextBlock" Width="150"/>
+                <TextBlock Text="Temperature:" Name="temperatureTextBlock" RelativePanel.Below="cropNameTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
+                <TextBox Text="{Binding Temperature, Mode=TwoWay}" Name="temperatureTextBox"  RelativePanel.RightOf="temperatureTextBlock" Margin="47,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="temperatureTextBlock" Width="150"/>
+                <TextBlock Text="Humidity:" Name="humidityTextBlock" RelativePanel.Below="temperatureTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
+                <TextBox Text="{Binding Humidity,Mode=TwoWay}" Name="humidityTextBox"  RelativePanel.RightOf="humidityTextBlock" Margin="70,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="humidityTextBlock" Width="150"/>
+                <TextBlock Text="Light:" Name="lightTextBlock" RelativePanel.Below="humidityTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
+                <TextBox Text="{Binding Light,Mode=TwoWay}" Name="lightTextBox"  RelativePanel.RightOf="lightTextBlock" Margin="97,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="lightTextBlock" Width="150"/>
+                <TextBlock Text="Time of the year" Name="finalDateTextBlock" RelativePanel.Below="lightTextBlock" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="addCropLabel"/>
+                <DatePicker Date="{Binding TimeOfYear, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}" Name="timeOfYearDatePicker"  RelativePanel.RightOf="finalDateTextBlock" Margin="25,5,0,0" Foreground="Wheat" RelativePanel.AlignBottomWith="finalDateTextBlock"/>
+                <Button Content="Add crop" Name="addCropButton" Command="{Binding AddCropCommand}" RelativePanel.Below="finalDateTextBlock" Margin="25,5,0,0" Foreground="Wheat" RelativePanel.AlignLeftWith="addCropLabel" />
 
-            <TextBlock Text="Delete a crop" Name="deleteCropLabel" RelativePanel.Below="addCropButton" Margin="25,20,0,0" Foreground="Wheat"/>
-            <TextBlock Text="Cropname:" Name="deleteCropNameTextBlock" RelativePanel.Below="deleteCropLabel" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="deleteCropLabel"/>
-            <TextBox Text="{Binding DeleteCropName, Mode=TwoWay}" Name="deleteCropNameTextBox" RelativePanel.Below="deleteCropLabel" Width="150" Foreground="Wheat" RelativePanel.AlignBottomWith="deleteCropNameTextBlock" RelativePanel.RightOf="deleteCropNameTextBlock" Margin="63,5,0,0"/>
-            <Button Name="deleteCropButton" Command="{Binding DeleteCropCommand}" RelativePanel.Below="deleteCropNameTextBox" Foreground="Wheat" Margin="25,5,0,0" Content="Delete crop" RelativePanel.AlignLeftWith="deleteCropLabel"/>
-        </RelativePanel>
+                <TextBlock Text="Delete a crop" Name="deleteCropLabel" RelativePanel.Below="addCropButton" Margin="25,20,0,0" Foreground="Wheat"/>
+                <TextBlock Text="Cropname:" Name="deleteCropNameTextBlock" RelativePanel.Below="deleteCropLabel" Margin="25,5,0,0" Foreground="Wheat" Height="32" Padding="0,5,0,0" RelativePanel.AlignLeftWith="deleteCropLabel"/>
+                <TextBox Text="{Binding DeleteCropName, Mode=TwoWay}" Name="deleteCropNameTextBox" RelativePanel.Below="deleteCropLabel" Width="150" Foreground="Wheat" RelativePanel.AlignBottomWith="deleteCropNameTextBlock" RelativePanel.RightOf="deleteCropNameTextBlock" Margin="63,5,0,0"/>
+                <Button Name="deleteCropButton" Command="{Binding DeleteCropCommand}" RelativePanel.Below="deleteCropNameTextBox" Foreground="Wheat" Margin="25,5,0,0" Content="Delete crop" RelativePanel.AlignLeftWith="deleteCropLabel"/>
+            </RelativePanel>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -1,4 +1,4 @@
-﻿using Smart_Garden_UWP.Services;
+﻿using Smart_Garden_UWP.Services.Interfaces;
 using Smart_Garden_UWP.Utilities;
 using Smart_Garden_UWP_Models;
 using System;
@@ -8,10 +8,9 @@ namespace Smart_Garden_UWP.ViewModels
 {
     public class StatisticsViewModel : INotifyPropertyChanged
     {
-        private UserService userService;
-        private CropService cropService;
-        private NavigationService navigationService;
-        private SensorService sensorService;
+        private IUserService userService;
+        private ICropService cropService;
+        private INavigationService navigationService;
         private User user;
 
         #region Properties of the viewmodel
@@ -42,12 +41,11 @@ namespace Smart_Garden_UWP.ViewModels
         }
         #endregion
 
-        public StatisticsViewModel(UserService userService, NavigationService navigationService, CropService cropService, SensorService sensorService)
+        public StatisticsViewModel(IUserService userService, INavigationService navigationService, ICropService cropService)
         {
             this.userService = userService;
             this.navigationService = navigationService;
             this.cropService = cropService;
-            this.sensorService = sensorService;
 
             LoadCommands();
         }

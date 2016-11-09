@@ -40,53 +40,54 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <RelativePanel Padding="5" HorizontalAlignment="Center">
+                <TextBlock Text="User Management" FontSize="30" HorizontalAlignment="Center" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" x:Name="title" Margin="0,0,0,20" Foreground="Black"/>
+                <TextBlock Text="{Binding Error}" x:Name="errorLabel" Foreground="Red" RelativePanel.Below="title" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                <TextBlock Text="Filter on role: " Name="filterTextBlock" RelativePanel.Below="errorLabel"  Height="30" Padding="5" Foreground="Black"/>
+                <ComboBox x:Name="filterUserList" RelativePanel.Below="errorLabel" RelativePanel.RightOf="filterTextBlock" ItemsSource="{Binding UserFilters}" SelectedItem="{Binding Filter, Mode=TwoWay}" Margin="0,0,0,15"/>
+                <ListView ItemsSource="{Binding UsersList}" RelativePanel.Below="filterUserList" x:Name="usersListView" Margin="25,0,0,0" DataFetchSize="5" SelectedItem="{Binding DeleteUserObj, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
+                                <SymbolIcon Symbol="Contact" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <SymbolIcon.RenderTransform>
+                                        <CompositeTransform ScaleX="2" ScaleY="2"/>
+                                    </SymbolIcon.RenderTransform>
+                                </SymbolIcon>
+                                <TextBlock Text="{Binding Username}" FontWeight="Bold" Margin="20,0,0,0" FontSize="18" Width="90"/>
+                                <Button Margin="10,0,0,0" Background="#00000000" Command="{Binding ElementName=usersListView,Path=DataContext.DeleteUserCommand}">
+                                    <SymbolIcon Symbol="Delete"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-        <RelativePanel Padding="5" HorizontalAlignment="Center">
-            <TextBlock Text="User Management" FontSize="30" HorizontalAlignment="Center" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" x:Name="title" Margin="0,0,0,20" Foreground="Black"/>
-            <TextBlock Text="{Binding Error}" x:Name="errorLabel" Foreground="Red" RelativePanel.Below="title" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-            <TextBlock Text="Filter on role: " Name="filterTextBlock" RelativePanel.Below="errorLabel"  Height="30" Padding="5" Foreground="Black"/>
-            <ComboBox x:Name="filterUserList" RelativePanel.Below="errorLabel" RelativePanel.RightOf="filterTextBlock" ItemsSource="{Binding UserFilters}" SelectedItem="{Binding Filter, Mode=TwoWay}" Margin="0,0,0,15"/>
-            <ListView ItemsSource="{Binding UsersList}" RelativePanel.Below="filterUserList" x:Name="usersListView" Margin="25,0,0,0" DataFetchSize="5" SelectedItem="{Binding DeleteUserObj, Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
-                            <SymbolIcon Symbol="Contact" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                <SymbolIcon.RenderTransform>
-                                    <CompositeTransform ScaleX="2" ScaleY="2"/>
-                                </SymbolIcon.RenderTransform>
-                            </SymbolIcon>
-                            <TextBlock Text="{Binding Username}" FontWeight="Bold" Margin="20,0,0,0" FontSize="18" Width="90"/>
-                            <Button Margin="10,0,0,0" Background="#00000000" Command="{Binding ElementName=usersListView,Path=DataContext.DeleteUserCommand}">
-                                <SymbolIcon Symbol="Delete"/>
-                            </Button>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                <TextBlock Text="Create user" x:Name="createUserLabel" RelativePanel.RightOf="filterUserList" RelativePanel.Below="errorLabel" Margin="50,0,0,10" FontSize="20" Foreground="Black"/>
+                <TextBlock Text="Username:" x:Name="usernameLabel" RelativePanel.Below="createUserLabel" RelativePanel.AlignLeftWith="createUserLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="usernameTextBox" RelativePanel.RightOf="usernameLabel" RelativePanel.AlignBottomWith="usernameLabel" Margin="10,0,0,5" Width="150" Text="{Binding Username, Mode=TwoWay}"/>
+                <TextBlock x:Name="passwordLabel" Text="Password:" RelativePanel.Below="usernameLabel" RelativePanel.AlignLeftWith="usernameLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="passwordTextBox" RelativePanel.RightOf="passwordLabel" RelativePanel.AlignBottomWith="passwordLabel" Margin="14,0,0,5" Width="150" Text="{Binding Password, Mode=TwoWay}"/>
+                <TextBlock x:Name="roleLabel" Text="Role:" RelativePanel.Below="passwordLabel" RelativePanel.AlignLeftWith="passwordLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
+                <ComboBox x:Name="rolesComboBox" RelativePanel.AlignBottomWith="roleLabel" RelativePanel.RightOf="roleLabel" Margin="47,0,0,5" Width="150" ItemsSource="{Binding Roles}" SelectedItem="{Binding Role,Mode=TwoWay}"></ComboBox>
+                <Button x:Name="addUserButton" RelativePanel.Below="roleLabel" RelativePanel.RightOf="roleLabel" Width="160" Command="{Binding AddUserCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Add"/>
+                        <TextBlock Text="Add user" Margin="20,0,0,0"/>
+                    </StackPanel>
+                </Button>
 
-            <TextBlock Text="Create user" x:Name="createUserLabel" RelativePanel.RightOf="filterUserList" RelativePanel.Below="errorLabel" Margin="50,0,0,10" FontSize="20" Foreground="Black"/>
-            <TextBlock Text="Username:" x:Name="usernameLabel" RelativePanel.Below="createUserLabel" RelativePanel.AlignLeftWith="createUserLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
-            <TextBox x:Name="usernameTextBox" RelativePanel.RightOf="usernameLabel" RelativePanel.AlignBottomWith="usernameLabel" Margin="10,0,0,5" Width="150" Text="{Binding Username, Mode=TwoWay}"/>
-            <TextBlock x:Name="passwordLabel" Text="Password:" RelativePanel.Below="usernameLabel" RelativePanel.AlignLeftWith="usernameLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
-            <TextBox x:Name="passwordTextBox" RelativePanel.RightOf="passwordLabel" RelativePanel.AlignBottomWith="passwordLabel" Margin="14,0,0,5" Width="150" Text="{Binding Password, Mode=TwoWay}"/>
-            <TextBlock x:Name="roleLabel" Text="Role:" RelativePanel.Below="passwordLabel" RelativePanel.AlignLeftWith="passwordLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
-            <ComboBox x:Name="rolesComboBox" RelativePanel.AlignBottomWith="roleLabel" RelativePanel.RightOf="roleLabel" Margin="47,0,0,5" Width="150" ItemsSource="{Binding Roles}" SelectedItem="{Binding Role,Mode=TwoWay}"></ComboBox>
-            <Button x:Name="addUserButton" RelativePanel.Below="roleLabel" RelativePanel.RightOf="roleLabel" Width="160" Command="{Binding AddUserCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <SymbolIcon Symbol="Add"/>
-                    <TextBlock Text="Add user" Margin="20,0,0,0"/>
-                </StackPanel>
-            </Button>
-
-            <TextBlock Text="Remove user" x:Name="removeUserLabel" RelativePanel.Below="addUserButton" RelativePanel.AlignLeftWith="roleLabel" Margin="50,30,0,5" FontSize="20" Foreground="Black"/>
-            <TextBlock Text="Username:" x:Name="delLabel" RelativePanel.Below="removeUserLabel" RelativePanel.AlignLeftWith="createUserLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
-            <TextBox x:Name="delTextBox" RelativePanel.RightOf="delLabel" RelativePanel.AlignBottomWith="delLabel" Margin="10,0,0,5" Width="150" Text="{Binding DeleteUsername, Mode=TwoWay}"/>
-            <Button x:Name="delUserButton" RelativePanel.Below="delLabel" RelativePanel.RightOf="roleLabel" Width="160" Command="{Binding DeleteUserCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <SymbolIcon Symbol="Delete"/>
-                    <TextBlock Text="Remove user" Margin="20,0,0,0"/>
-                </StackPanel>
-            </Button>
-        </RelativePanel>
+                <TextBlock Text="Remove user" x:Name="removeUserLabel" RelativePanel.Below="addUserButton" RelativePanel.AlignLeftWith="roleLabel" Margin="50,30,0,5" FontSize="20" Foreground="Black"/>
+                <TextBlock Text="Username:" x:Name="delLabel" RelativePanel.Below="removeUserLabel" RelativePanel.AlignLeftWith="createUserLabel" Height="32" Padding="0,5,0,0" Margin="50,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="delTextBox" RelativePanel.RightOf="delLabel" RelativePanel.AlignBottomWith="delLabel" Margin="10,0,0,5" Width="150" Text="{Binding DeleteUsername, Mode=TwoWay}"/>
+                <Button x:Name="delUserButton" RelativePanel.Below="delLabel" RelativePanel.RightOf="roleLabel" Width="160" Command="{Binding DeleteUserCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Delete"/>
+                        <TextBlock Text="Remove user" Margin="20,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </RelativePanel>
+        </ScrollViewer>
     </Grid>
 </Page>

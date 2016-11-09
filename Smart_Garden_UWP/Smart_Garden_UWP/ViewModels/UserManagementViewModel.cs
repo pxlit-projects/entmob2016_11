@@ -1,5 +1,5 @@
 ﻿using Smart_Garden_UWP.Extensions;
-using Smart_Garden_UWP.Services;
+using Smart_Garden_UWP.Services.Interfaces;
 using Smart_Garden_UWP.Utilities;
 using Smart_Garden_UWP_Models;
 using SmarT_Garden_UWP_Models.Models;
@@ -12,8 +12,8 @@ namespace Smart_Garden_UWP.ViewModels
 {
     public class UserManagementViewModel : INotifyPropertyChanged
     {
-        private UserService userService;
-        private NavigationService navigationService;
+        private IUserService userService;
+        private INavigationService navigationService;
 
         #region Properties of the ViewModel
         private String password;
@@ -212,7 +212,7 @@ namespace Smart_Garden_UWP.ViewModels
         }
         #endregion
 
-        public UserManagementViewModel(UserService userService, NavigationService navigationService)
+        public UserManagementViewModel(IUserService userService, INavigationService navigationService)
         {
             this.userService = userService;
             this.navigationService = navigationService;
@@ -259,6 +259,8 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     Error = "Error bij het toevoegen van de user. Probeer het later opnieuw!";
                 }
+
+                NotifyPropertyChanged("UsersList");
             }
         }
 
@@ -281,8 +283,11 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     Error = "Error bij het verwijderen van de user. Probeer het later opnieuw!";
                 }
+
+                NotifyPropertyChanged("UsersList");
             }
         }
-        #endregion       
+        #endregion 
+        
     } 
 }

@@ -15,5 +15,6 @@ be\pxl\Models\User.class
 be\pxl\Services\IUserService.class
 be\pxl\Services\UserService.class
 be\pxl\Repositories\CropRepository.class
+be\pxl\Repositories\UserRoleRepository.class
 be\pxl\Models\SensorEntity.class
 be\pxl\Services\ISensorEntityService.class

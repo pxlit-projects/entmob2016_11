@@ -1,11 +1,12 @@
 ﻿using Smart_Garden_UWP.Pages;
+using Smart_Garden_UWP.Services.Interfaces;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace Smart_Garden_UWP.Services
 {
-    public class NavigationService
+    public class NavigationService : INavigationService
     {
         public void NavigateTo(string key)
         {

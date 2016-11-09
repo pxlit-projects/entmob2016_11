@@ -1,16 +1,16 @@
 ﻿using Smart_Garden_UWP.Utilities;
-using Smart_Garden_UWP.Services;
 using System;
 using System.ComponentModel;
 using Smart_Garden_UWP_Models;
-using SmarT_Garden_UWP_Models.Models;
+using Smart_Garden_UWP.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace Smart_Garden_UWP.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private UserService userService;
-        private NavigationService navigationService;
+        private IUserService userService;
+        private INavigationService navigationService;
 
         #region Properties of the viewmodel
         private String username;
@@ -58,9 +58,7 @@ namespace Smart_Garden_UWP.ViewModels
         }
         #endregion
 
-        
-
-        public LoginViewModel(UserService userService, NavigationService navigationService)
+        public LoginViewModel(IUserService userService, INavigationService navigationService)
         {
             LoadCommands();
             this.userService = userService;
@@ -86,13 +84,14 @@ namespace Smart_Garden_UWP.ViewModels
 
         private async void Login(object obj)
         {
+            
             User user = await userService.getUserByUsername(Username);
 
             if (checkLogin(user))
             {
                 if (user.Role.FindIndex(x => x.Role.Equals("ROLE_ADMIN")) != -1)
                 {
-                    //navigate
+                    //navigate + send logged in user
                     Messenger.Default.Send<User>(user);
                     navigationService.NavigateTo("Admin");
                 }
@@ -100,7 +99,9 @@ namespace Smart_Garden_UWP.ViewModels
                 {
                     navigationService.NavigateTo("User");
                 }
+                
             }
+
         }
         #endregion
 
@@ -113,6 +114,18 @@ namespace Smart_Garden_UWP.ViewModels
             }
 
             return false;
+        }
+
+        //ONLY FOR TESTING
+        public async Task<User> testForLogin()
+        {
+            User user = await userService.getUserByUsername(Username);
+            if (checkLogin(user))
+            {
+                return user;
+            }
+
+            return null;
         }
         #endregion
     }

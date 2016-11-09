@@ -3,12 +3,19 @@ using Smart_Garden_UWP_Repo.Repository;
 using Smart_Garden_UWP_Models;
 using System.Collections.Generic;
 using System;
+using Smart_Garden_UWP.Services.Interfaces;
 
 namespace Smart_Garden_UWP.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private UserRepository userRepository = new UserRepository();
+
+        IUserRepository userRepository;
+
+        public UserService(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
 
         public async Task<List<User>> getAllUsers()
         {

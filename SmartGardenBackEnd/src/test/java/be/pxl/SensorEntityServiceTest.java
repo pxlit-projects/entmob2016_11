@@ -54,11 +54,12 @@ public class SensorEntityServiceTest {
     @Test
     public void testFindOne(){
 
-        when(repositoryMock.findOne(anyInt())).thenReturn(new SensorEntity(1.0, 1.0, 1.0, null, false));
+        SensorEntity newTag = new SensorEntity(1.0, 1.0, 1.0, null, false);
+        when(repositoryMock.findOne(anyInt())).thenReturn(newTag);
 
         SensorEntity sTag = testSensorService.getEntityById(0);
 
-        Assert.assertEquals(sTag.getClass(), SensorEntity.class);
+        Assert.assertSame(sTag, newTag);
     }
 
     @Test
@@ -68,7 +69,7 @@ public class SensorEntityServiceTest {
         sensorValues.add(new SensorEntity(1.0, 1.0, 1.0, null, false));
         when(repositoryMock.findAll()).thenReturn(sensorValues);
 
-        Assert.assertEquals(testSensorService.getAll().getClass(), sensorValues.getClass());
+        Assert.assertSame(testSensorService.getAll(), sensorValues);
 
     }
 

@@ -41,7 +41,7 @@ public class CropServiceTest {
         crops.add(new Crop(2.0, 2.0, 2.0, new Timestamp(12345), "Wiet"));
         when(repositoryMock.findAll()).thenReturn(crops);
 
-        Assert.assertEquals(testCropService.getAll().getClass(), crops);
+        Assert.assertSame(testCropService.getAll(), crops);
 
     }
 
@@ -52,7 +52,7 @@ public class CropServiceTest {
         when(repositoryMock.findCropByName(anyString())).thenReturn(newCrop);
 
         Crop crop = testCropService.getCropByName("Wiet");
-        Assert.assertEquals(newCrop.getClass(), crop.getClass());
+        Assert.assertSame(newCrop, crop);
 
     }
 
