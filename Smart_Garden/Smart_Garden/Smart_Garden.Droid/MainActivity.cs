@@ -1,11 +1,11 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+
 
 namespace Smart_Garden.Droid
 {
@@ -21,8 +21,8 @@ namespace Smart_Garden.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             var a = new Robotics.Mobile.Core.Bluetooth.LE.Adapter();
-            
-            
+
+
             LoadApplication(new App(a));
         }
     }

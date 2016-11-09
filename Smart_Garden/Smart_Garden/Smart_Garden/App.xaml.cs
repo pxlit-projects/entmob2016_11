@@ -15,7 +15,7 @@ namespace Smart_Garden
         public App(IAdapter Adapter)
         {
             InitializeComponent();
-            var np = new NavigationPage(new Login(Adapter));
+            var np = new NavigationPage(new Login());
             if (Device.OS != TargetPlatform.iOS)
             {
                 // we manage iOS themeing via the native app Appearance API

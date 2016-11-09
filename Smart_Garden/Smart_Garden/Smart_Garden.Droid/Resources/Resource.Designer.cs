@@ -27,6 +27,7 @@ namespace Smart_Garden.Droid
 		public static void UpdateIdValues()
 		{
 			global::Robotics.Mobile.Core.Resource.String.library_name = global::Smart_Garden.Droid.Resource.String.library_name;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Smart_Garden.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation

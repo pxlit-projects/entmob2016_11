@@ -15,5 +15,6 @@ public class Sender {
 
     public void sendMessage(String text){
         jmsTemplate.send("ServiceQueue", s -> s.createTextMessage(text));
+        System.out.println("wordt uitgevoerd");
     }
 }

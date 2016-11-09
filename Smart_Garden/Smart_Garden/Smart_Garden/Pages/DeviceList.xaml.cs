@@ -1,4 +1,5 @@
 ﻿using Robotics.Mobile.Core.Bluetooth.LE;
+using Smart_Garden.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +15,12 @@ namespace Smart_Garden.Pages
     public partial class DeviceList : ContentPage
     {
         IAdapter adapter;
+        User user;
         ObservableCollection<IDevice> devices;
-        public DeviceList(IAdapter adapter)
+        public DeviceList(IAdapter adapter, User user)
         {
             InitializeComponent();
-
+            this.user = user;
             this.adapter = adapter;
             this.devices = new ObservableCollection<IDevice>();
             listView.ItemsSource = devices;
