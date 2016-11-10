@@ -1,25 +1,17 @@
-﻿using Android.Widget;
-using Robotics.Mobile.Core.Bluetooth.LE;
-using Smart_Garden.Models;
-using Smart_Garden.Repository;
-using Smart_Garden.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Robotics.Mobile.Core.Bluetooth.LE;
+using Smart_Garden.ViewModels;
 using Xamarin.Forms;
 
 namespace Smart_Garden.Pages
 {
     public partial class Login : ContentPage
     {
-
-        public Login()
+        IAdapter adapter;
+        public Login(IAdapter adapter)
         {
             InitializeComponent();
-
+            this.adapter = adapter;
+            MessagingCenter.Send(adapter, "adapter");
         }
     }
 }

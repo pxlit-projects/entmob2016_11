@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Smart_Garden.Extensions"
+             xmlns:ViewModel="clr-namespace:Smart_Garden.ViewModels"
              x:Class="Smart_Garden.Pages.DeviceList">
   <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ContentPage.BindingContext>
+    <ViewModel:DataViewModel/>
+  </ContentPage.BindingContext>
   <ContentPage.Resources>
     <ResourceDictionary>
       <local:GuidConverter x:Key="guidConverter"/>
@@ -13,11 +17,11 @@
   </ContentPage.Resources>
   <ContentPage.ToolbarItems>
     <!--ToolbarItem x:Name="ScanHrmButton" Name="Scan" Icon="glyphish_29_heart.png"/-->
-    <ToolbarItem x:Name="ScanAllButton" Name="Scan" Icon="bluetooth.png"/>
+    <ToolbarItem x:Name="ScanAllButton" Name="Scan" Command="{Binding ScanCommand}" Icon="bluetooth.png"/>
   </ContentPage.ToolbarItems>
 
   <AbsoluteLayout>
-    <ListView x:Name="listView" ItemSelected="OnItemSelected"
+    <ListView x:Name="listView" BindingContext="{Binding Devices}"
 			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
             AbsoluteLayout.LayoutFlags="All" >
       <ListView.ItemTemplate>
@@ -43,6 +47,7 @@
 
     <Frame x:Name="InfoFrame"
 			BackgroundColor="#CC0000"
+      IsVisible="{Binding HideFrame}"
 			AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.8, 0.2"
             AbsoluteLayout.LayoutFlags="All">
       <Label

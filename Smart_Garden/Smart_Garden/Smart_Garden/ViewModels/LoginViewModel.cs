@@ -1,4 +1,6 @@
-﻿using Smart_Garden.Models;
+﻿using Robotics.Mobile.Core.Bluetooth.LE;
+using Smart_Garden.Models;
+using Smart_Garden.Pages;
 using Smart_Garden.Repository;
 using Smart_Garden.Repository.Interfaces;
 using Smart_Garden.Services;
@@ -15,10 +17,25 @@ namespace Smart_Garden.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
+        private IAdapter adapter;
         private UserService userService;
         private NavigationService navigationService;
         #region Properties of the viewmodel
         private String username;
+
+        public IAdapter Adapter
+        {
+            get
+            {
+                return adapter;
+            }
+            set
+            {
+                adapter = value;
+                NotifyPropertyChanged("Adapter");
+   
+            }
+        }
         public String Username
         {
             get
@@ -91,11 +108,9 @@ namespace Smart_Garden.ViewModels
 
         private async void Login(object obj)
         {
-            User user = null;
-            await Task.Run(async () =>
-             {
-                 user = await userService.getUserByUsername(Username);
-             });
+             
+            User user = await userService.getUserByUsername(Username);
+             
             
 
             if (checkLogin(user))
@@ -103,8 +118,8 @@ namespace Smart_Garden.ViewModels
                 if (user.Role.FindIndex(x => x.Role.Equals("ROLE_ADMIN")) != -1)
                 {
                     //navigate
-                    Messenger.Default.Send<User>(user);
-                    //navigationService.NavigateTo("Admin");
+                    MessagingCenter.Send(user, "user");
+                    navigationService.NavigateTo("Device");
                 }
                 else
                 {
@@ -125,5 +140,6 @@ namespace Smart_Garden.ViewModels
             return false;
         }
         #endregion
+
     }
 }

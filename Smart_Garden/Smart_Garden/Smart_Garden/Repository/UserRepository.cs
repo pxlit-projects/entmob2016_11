@@ -25,7 +25,7 @@ namespace Smart_Garden.Repository
         public async Task<List<User>> getAllUsers()
         {
             List<User> users = null;
-            var baseUri = "http://localhost:9999/user";
+            var baseUri = "http://192.168.0.191:9999/user";
 
             String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)
@@ -39,7 +39,7 @@ namespace Smart_Garden.Repository
         public async Task<User> getUserByUsername(String username)
         {
             User user = null;
-            var baseUri = "http://192.168.1.100:9999/user/getByUsername/" + username;
+            var baseUri = "http://192.168.0.191:9999/user/getByUsername/" + username;
 
             String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)

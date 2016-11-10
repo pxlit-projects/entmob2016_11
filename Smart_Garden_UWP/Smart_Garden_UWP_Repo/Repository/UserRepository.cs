@@ -66,7 +66,7 @@ namespace Smart_Garden_UWP_Repo.Repository
         public async Task<User> getUserByUsername(String username)
         {
             User user = null;
-            var baseUri = "http://localhost:9999/user/getByUsername/" + username;
+            var baseUri = "http://10.0.2.2:9999/user/getByUsername/" + username;
 
             String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)

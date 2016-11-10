@@ -11,11 +11,12 @@ namespace Smart_Garden
 {
     public partial class App : Application
     {
-
-        public App(IAdapter Adapter)
+        IAdapter adapter;
+        public App(IAdapter adapter)
         {
             InitializeComponent();
-            var np = new NavigationPage(new Login());
+            this.adapter = adapter;
+            var np = new NavigationPage(new Login(adapter));
             if (Device.OS != TargetPlatform.iOS)
             {
                 // we manage iOS themeing via the native app Appearance API
