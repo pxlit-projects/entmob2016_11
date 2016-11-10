@@ -25,13 +25,13 @@ namespace Smart_Garden.ViewModels
             try
             {
 
-                MessagingCenter.Subscribe<IAdapter>(this, "adapter", (padapter) =>
+                MessagingCenter.Subscribe<Login, IAdapter>(this, "adapter", (sender, arg) =>
                 {
-                    Adapter = padapter;
+                    Adapter = arg;
                 });
-                MessagingCenter.Subscribe<User>(this, "user", (puser) =>
+                MessagingCenter.Subscribe<Login, User>(this, "user", (sender, arg) =>
                 {
-                    User = puser;
+                    User = arg;
                 });
             }
             catch(Exception ex)
