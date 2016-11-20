@@ -2,12 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Smart_Garden.Extensions"
-             xmlns:ViewModel="clr-namespace:Smart_Garden.ViewModels"
              x:Class="Smart_Garden.Pages.DeviceList">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
-  <ContentPage.BindingContext>
-    <ViewModel:DataViewModel/>
-  </ContentPage.BindingContext>
   <ContentPage.Resources>
     <ResourceDictionary>
       <local:GuidConverter x:Key="guidConverter"/>
@@ -15,15 +10,13 @@
       <local:NameColorConverter x:Key="nameColorConverter"/>
     </ResourceDictionary>
   </ContentPage.Resources>
-  <ContentPage.ToolbarItems>
-    <!--ToolbarItem x:Name="ScanHrmButton" Name="Scan" Icon="glyphish_29_heart.png"/-->
-    <ToolbarItem x:Name="ScanAllButton" Name="Scan" Command="{Binding ScanCommand}" Icon="bluetooth.png"/>
-  </ContentPage.ToolbarItems>
-
-  <AbsoluteLayout>
-    <ListView x:Name="listView" BindingContext="{Binding Devices}"
-			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All" >
+  <StackLayout>
+    <Button x:Name="btnScan" Text="Scan" Command="{Binding StartScanCommand}" />
+    <Label x:Name="bleutoothStatus" Text="{Binding BleStatus}"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+    <ListView x:Name="DeviceListView" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+            ItemsSource="{Binding DeviceList}">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
@@ -34,7 +27,7 @@
 			        		Font="Medium"
 			        		LineBreakMode="TailTruncation"
 			        		TextColor="{Binding Name, Converter={StaticResource nameColorConverter}}" />
-                <Label Text="{Binding Path=ID, Converter={StaticResource guidConverter}}"
+                <Label Text="{Binding Path=Id, Converter={StaticResource guidConverter}}"
 				        	YAlign="Center"
 				        	Font="Micro"
 				        	TextColor="Gray" />
@@ -43,17 +36,8 @@
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
-    </ListView>
 
-    <Frame x:Name="InfoFrame"
-			BackgroundColor="#CC0000"
-      IsVisible="{Binding HideFrame}"
-			AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.8, 0.2"
-            AbsoluteLayout.LayoutFlags="All">
-      <Label
-				Text="Click the Bluetooth icon to scan for devices."
-				TextColor="White"
-				Font="Large" />
-    </Frame>
-  </AbsoluteLayout>
+
+    </ListView>
+  </StackLayout>
 </ContentPage>

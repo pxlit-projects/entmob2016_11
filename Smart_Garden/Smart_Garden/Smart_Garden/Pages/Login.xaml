@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Smart_Garden.Extensions"
-             xmlns:ViewModel="clr-namespace:Smart_Garden.ViewModels"
              x:Class="Smart_Garden.Pages.Login">
   <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
   <ContentPage.Resources>
@@ -17,9 +16,7 @@
                 Android="20, 20, 20, 20"
                 WinPhone="20, 20, 20, 20" />
   </ContentPage.Padding>
-  <ContentPage.BindingContext>
-    <ViewModel:LoginViewModel/>
-  </ContentPage.BindingContext>
+
 
 
   

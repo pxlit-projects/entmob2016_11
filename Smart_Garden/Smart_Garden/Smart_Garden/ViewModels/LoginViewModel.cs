@@ -1,4 +1,4 @@
-﻿using Robotics.Mobile.Core.Bluetooth.LE;
+﻿using Plugin.BLE.Abstractions.Contracts;
 using Smart_Garden.Models;
 using Smart_Garden.Pages;
 using Smart_Garden.Repository;
@@ -18,10 +18,30 @@ namespace Smart_Garden.ViewModels
     public class LoginViewModel : INotifyPropertyChanged
     {
         private IAdapter adapter;
+        private IBluetoothLE ble;
+        private INavigation navigation;
         private UserService userService;
-        private NavigationService navigationService;
-        #region Properties of the viewmodel
         private String username;
+        private String password;
+        public Command LoginCommand { get; }
+        public LoginViewModel(IAdapter adapter, IBluetoothLE ble, INavigation navigation)
+        {
+            this.adapter = adapter;
+            this.ble = ble;
+            this.userService = new UserService();
+            this.navigation = navigation;
+            LoginCommand = new Command(Login);
+        }
+        #region INotifyPropertyChanged Implementation
+        protected void NotifyPropertyChanged(String info)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
+        }
+        #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #region Properties of the viewmodel
+
 
         public IAdapter Adapter
         {
@@ -47,11 +67,9 @@ namespace Smart_Garden.ViewModels
             {
                 username = value;
                 NotifyPropertyChanged("Username");
-                LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private String password;
         public String Password
         {
             get
@@ -63,48 +81,11 @@ namespace Smart_Garden.ViewModels
             {
                 password = value;
                 NotifyPropertyChanged("Password");
-                LoginCommand.RaiseCanExecuteChanged();
             }
         }
         #endregion 
 
-        #region INotifyPropertyChanged Implementation
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(String info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
-        #endregion
-
-
-
-        public LoginViewModel()
-        {
-            LoadCommands();
-            this.userService = new UserService();
-            this.navigationService = new NavigationService();
-        }
-
-        #region Commands Section
-        public CustomCommand LoginCommand { get; set; }
-
-        private void LoadCommands()
-        {
-            LoginCommand = new CustomCommand(Login, CanLogin);
-        }
-
-        private bool CanLogin(object obj)
-        {
-            //if(!String.IsNullOrEmpty(Password) && !String.IsNullOrEmpty(Username))
-            //{
-            //    return true;
-            //}
-            return true;
-        }
 
         private async void Login(object obj)
         {
@@ -118,8 +99,11 @@ namespace Smart_Garden.ViewModels
                 if (user.Role.FindIndex(x => x.Role.Equals("ROLE_ADMIN")) != -1)
                 {
                     //navigate
-                    MessagingCenter.Send(user, "user");
-                    navigationService.NavigateTo("Device");
+
+                    await navigation.PushAsync(new DeviceList(user, adapter, ble)
+                    {
+                        Title = "Devices"
+                    });
                 }
                 else
                 {
@@ -127,7 +111,7 @@ namespace Smart_Garden.ViewModels
                 }
             }
         }
-        #endregion
+        
 
         #region Helper methods
         private Boolean checkLogin(User user)

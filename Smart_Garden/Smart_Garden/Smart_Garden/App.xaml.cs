@@ -1,4 +1,5 @@
-﻿using Robotics.Mobile.Core.Bluetooth.LE;
+﻿using Plugin.BLE;
+using Plugin.BLE.Abstractions.Contracts;
 using Smart_Garden.Pages;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,18 @@ namespace Smart_Garden
 {
     public partial class App : Application
     {
-        IAdapter adapter;
-        public App(IAdapter adapter)
+        IAdapter adapter = CrossBluetoothLE.Current.Adapter;
+        IBluetoothLE ble = CrossBluetoothLE.Current;
+
+        public App()
         {
             InitializeComponent();
-            this.adapter = adapter;
-            var np = new NavigationPage(new Login(adapter));
-            if (Device.OS != TargetPlatform.iOS)
+
+            NavigationPage navigation = new NavigationPage(new Login(adapter, ble)
             {
-                // we manage iOS themeing via the native app Appearance API
-                np.BarBackgroundColor = Color.Red;
-            }
-            MainPage = np;
+                Title = "StrongPlate"
+            });
+            MainPage = navigation;
         }
 
 
