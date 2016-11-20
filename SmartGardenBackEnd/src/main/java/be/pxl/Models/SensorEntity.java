@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by 11308157 on 7/10/2016.
@@ -48,7 +50,9 @@ public class SensorEntity implements Serializable {
     }
 
     public SensorEntity(){
-        this.timeOfRecording = LocalDateTime.now();
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String now = ZonedDateTime.now().format(FORMATTER);
+        this.timeOfRecording = LocalDateTime.parse(now, FORMATTER);
     }
 
     public int getId() {

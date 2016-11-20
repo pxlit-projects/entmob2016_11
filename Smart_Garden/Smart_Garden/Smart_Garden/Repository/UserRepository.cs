@@ -35,6 +35,17 @@ namespace Smart_Garden.Repository
 
             return users;
         }
+        public async Task<bool> updateUser(User user)
+        {
+            var baseUri = "user/update";
+
+            if (await JsonApiClientPutRequestWithUserObj(baseUri, user))
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public async Task<User> getUserByUsername(String username)
         {
@@ -78,5 +89,36 @@ namespace Smart_Garden.Repository
 
             return null;
         }
+
+        private async Task<Boolean> JsonApiClientPutRequestWithUserObj(String baseUri, User user)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://192.168.0.191:9999/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("admin", "admin")));
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PutAsync(baseUri, stringContent);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
+            return false;
+        }
     }
 }
+

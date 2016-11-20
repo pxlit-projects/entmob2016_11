@@ -21,5 +21,9 @@ namespace Smart_Garden.Services
         {
             return await userRepository.getUserByUsername(username);
         }
+        public async Task<bool> addSensorToUser(User user)
+        {
+            return await userRepository.updateUser(user);
+        }
     }
 }

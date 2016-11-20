@@ -91,7 +91,7 @@ namespace Smart_Garden.ViewModels
                     MessagingCenter.Send(device, "connectdevice");
                 });
                 await adapter.StopScanningForDevicesAsync();
-                await navigation.PushAsync(new ServiceList()
+                await navigation.PushAsync(new ServiceList(user)
                 {
                     Title = "Services"
                 });

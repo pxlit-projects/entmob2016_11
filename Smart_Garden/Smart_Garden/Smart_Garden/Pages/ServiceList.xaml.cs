@@ -1,4 +1,5 @@
 ﻿using Robotics.Mobile.Core.Bluetooth.LE;
+using Smart_Garden.Models;
 using Smart_Garden.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace Smart_Garden.Pages
 {
     public partial class ServiceList : ContentPage
     {
-        public ServiceList()
+        public ServiceList(User user)
         {
             InitializeComponent();
-            BindingContext = new ServiceListViewModel();
+            BindingContext = new ServiceListViewModel(user);
         }
 
 

@@ -1,4 +1,6 @@
 ﻿using Plugin.BLE.Abstractions.Contracts;
+using Smart_Garden.Models;
+using Smart_Garden.Services;
 using Smart_Garden.Utilities;
 using System;
 using System.Collections.Generic;
@@ -15,13 +17,27 @@ namespace Smart_Garden.ViewModels
     public class ServiceListViewModel : INotifyPropertyChanged
     {
         private IDevice device;
-        List<ICharacteristic> configCharacteristics = new List<ICharacteristic>();
-        List<KeyValuePair<string, ICharacteristic>> characteristics = new List<KeyValuePair<string, ICharacteristic>>();
+        private UserService service;
+        private bool isRunning;
+        private User user;
         private double temperatureData;
         private double humidityData;
         private double lightData;
-        public ServiceListViewModel()
+        List<KeyValuePair<string, ICharacteristic>> characteristics = new List<KeyValuePair<string, ICharacteristic>>();
+        public ServiceListViewModel(User user)
         {
+            this.user = user;
+            isRunning = true;
+            service = new UserService();
+            Task.Factory.StartNew(async () =>
+            {
+                await Task.Delay(5000);
+                while (isRunning)
+                {
+                    isRunning = await AddEntity();
+                    await Task.Delay(10000);    
+                }
+            });
             MessagingCenter.Subscribe<DeviceItemViewModel>(this, "connectdevice", (arg) =>
             {
                 this.device = arg.Device;
@@ -56,6 +72,7 @@ namespace Smart_Garden.ViewModels
                 onPropertyChanged(nameof(TemperatureData));
             }
         }
+        
         public double LightData
         {
             get { return lightData; }
@@ -65,7 +82,7 @@ namespace Smart_Garden.ViewModels
                 onPropertyChanged(nameof(LightData));
             }
         }
-
+        
         public double HumidityData
         {
             get { return humidityData; }
@@ -83,6 +100,31 @@ namespace Smart_Garden.ViewModels
 
             var ambientTemp = (UInt16) BitConverter.ToUInt16(bytes, 2) / 128.0;
             return ambientTemp;
+        }
+
+        private double CalculateHumidityInPercent(byte[] sensorData)
+        {
+            int hum = BitConverter.ToUInt16(sensorData, 2);
+
+            hum = hum - (hum % 4);
+
+            return (-6f) + 125f * (hum / 65535f);
+        }
+
+        private double CalculateLight(byte[] data)
+        {
+            int mantissa;
+            int exponent;
+            ushort sfloat = BitConverter.ToUInt16(data, 0);
+
+            mantissa = sfloat & 0x0FFF;
+            exponent = (sfloat >> 12) & 0xFF;
+
+            double output;
+            double magnitude = Math.Pow(2.0f, exponent);
+            output = (mantissa * magnitude);
+
+            return output / 100.0f;
         }
 
         #endregion
@@ -122,6 +164,7 @@ namespace Smart_Garden.ViewModels
                 Debug.WriteLine("Error getHumidityService: " + ex);
             }
         }
+        
         private async Task GetLightService()
         {
             try
@@ -138,6 +181,7 @@ namespace Smart_Garden.ViewModels
                 Debug.WriteLine("Error getLightService: " + ex);
             }
         }
+        
         #endregion
         #region Readers
         private async Task readTemp()
@@ -155,13 +199,12 @@ namespace Smart_Garden.ViewModels
             {
                 byte[] bytes = args.Characteristic.Value;             
                 temperatureData = AmbientData(bytes);
-                temperatureData = ((double)(UInt16)temperatureData / 65536) * 165 - 40;
 
                 onPropertyChanged(nameof(TemperatureData));
             };
             await characteristic.StartUpdatesAsync();
         }
-
+        
         private async Task readLight()
         {
             ICharacteristic characteristic = null;
@@ -176,19 +219,12 @@ namespace Smart_Garden.ViewModels
             characteristic.ValueUpdated += (o, args) =>
             {
                 byte[] bytes = args.Characteristic.Value;
-                lightData = AmbientData(bytes);
-                int e, m;
-                int rawData =(int) lightData;
-
-                m = rawData & 0x0FFF;
-                e = (rawData & 0xF000) >> 12;
-
-                lightData = m * (0.01 * Math.Pow(2.0, e));
-
+                lightData = CalculateLight(bytes);
                 onPropertyChanged(nameof(LightData));
             };
             await characteristic.StartUpdatesAsync();
         }
+        
 
         private async Task readHumidity()
         {
@@ -204,14 +240,33 @@ namespace Smart_Garden.ViewModels
             characteristic.ValueUpdated += (o, args) =>
             {
                 byte[] bytes = args.Characteristic.Value;
-                humidityData = AmbientData(bytes);
-                humidityData = ((double)humidityData / 65536) * 100;
+                humidityData = CalculateHumidityInPercent(bytes);
                 onPropertyChanged(nameof(HumidityData));
             };
             await characteristic.StartUpdatesAsync();
         }
         
         #endregion
+
+        public async Task<bool> AddEntity()
+        {
+            try
+            {
+                Sensor sensor = new Sensor()
+                {
+                    above = true,
+                    Humid = humidityData,
+                    Light = lightData,
+                    Temp = temperatureData,
+                };
+                user.Sensors.Add(sensor);
+                return await service.addSensorToUser(user);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
     }
 }

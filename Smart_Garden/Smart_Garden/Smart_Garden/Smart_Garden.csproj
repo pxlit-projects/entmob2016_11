@@ -47,8 +47,6 @@
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Repository\CropRepository.cs" />
-    <Compile Include="Repository\Interfaces\ICropRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Extensions\EmptyStringConverter.cs" />
@@ -71,8 +69,6 @@
     <Compile Include="ViewModels\DeviceViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ServiceListViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
