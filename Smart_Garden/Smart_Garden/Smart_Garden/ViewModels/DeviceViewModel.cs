@@ -91,11 +91,11 @@ namespace Smart_Garden.ViewModels
                     MessagingCenter.Send(device, "connectdevice");
                 });
                 await adapter.StopScanningForDevicesAsync();
-                /*await navigation.PushAsync(new ServiceListPage()
+                await navigation.PushAsync(new ServiceList()
                 {
-                    Title = "StrongPlate"
+                    Title = "Services"
                 });
-                */
+                
 
             }
         }

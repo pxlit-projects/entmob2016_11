@@ -24,7 +24,7 @@
     <StackLayout VerticalOptions="StartAndExpand" Padding="30">
 
       <Label Text="Username" />
-      <Entry Text="{Binding Path=Username, Mode=TwoWay}" x:Name="usernameEntry" />
+      <Entry Text="{Binding Path=Username, Mode=TwoWay}"  x:Name="usernameEntry" />
 
       <Label Text="Password" />
       <Entry Text="{Binding Path=Password, Mode=TwoWay}" IsPassword="true" x:Name="passwordEntry" />

@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\RoundConverter.cs" />
     <Compile Include="Extensions\StringFormatConverter.cs" />
     <Compile Include="Models\Crop.cs" />
     <Compile Include="Models\Sensor.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="ViewModels\DeviceItemViewModel.cs" />
     <Compile Include="ViewModels\DeviceViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ServiceListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
