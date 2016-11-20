@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Smart_Garden.Repository.Interfaces
+namespace Smart_Garden.Services.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserService
     {
         Task<List<User>> getAllUsers();
-        Task<User> getUserByUsername(String username);
-        Task<bool> updateUser(User user);
+
+        Task<User> getUserByUsername(string username);
+
+        Task<bool> addSensorToUser(User user);
     }
 }
