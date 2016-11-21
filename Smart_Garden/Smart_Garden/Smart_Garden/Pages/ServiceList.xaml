@@ -2,13 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Smart_Garden.Pages.ServiceList"
-             xmlns:local="clr-namespace:Smart_Garden.Extensions">
+             xmlns:local="clr-namespace:Smart_Garden.Extensions"
+             xmlns:images="clr-namespace:Smart_Garden;assembly=Smart_Garden">
   <ContentPage.Resources>
     <ResourceDictionary>
       <local:RoundConverter x:Key="RoundConverter"/>
     </ResourceDictionary>
   </ContentPage.Resources>
   <StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Image Source="{Binding Image}" />
+    </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="Sensortag live data : " ></Label>
+    </StackLayout>
     <StackLayout Orientation="Horizontal">
       <Label Text="Temperature : " ></Label>
       <Label Text="{Binding TemperatureData , Converter={StaticResource RoundConverter}}" ></Label>

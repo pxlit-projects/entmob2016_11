@@ -18,6 +18,8 @@ namespace Smart_Garden.ViewModels
     {
         private IDevice device;
         private UserService service;
+        
+        
         private bool isRunning;
         private User user;
         private double temperatureData;
@@ -26,6 +28,7 @@ namespace Smart_Garden.ViewModels
         List<KeyValuePair<string, ICharacteristic>> characteristics = new List<KeyValuePair<string, ICharacteristic>>();
         public ServiceListViewModel(User user)
         {
+            Image = ImageSource.FromResource("Smart_Garden.sensortag.png");
             this.user = user;
             isRunning = true;
             service = new UserService();
@@ -63,6 +66,7 @@ namespace Smart_Garden.ViewModels
         }
         #endregion
         #region Properties
+        public ImageSource Image { get; set; }
         public double TemperatureData
         {
             get { return temperatureData; }

@@ -19,6 +19,8 @@ namespace Smart_Garden.Pages
         {
             InitializeComponent();
             BindingContext = new ServiceListViewModel(user);
+            
+
         }
 
 
