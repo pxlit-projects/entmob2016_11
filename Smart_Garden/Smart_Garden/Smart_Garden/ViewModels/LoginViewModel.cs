@@ -4,7 +4,6 @@ using Smart_Garden.Pages;
 using Smart_Garden.Repository;
 using Smart_Garden.Repository.Interfaces;
 using Smart_Garden.Services;
-using Smart_Garden.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,6 +55,20 @@ namespace Smart_Garden.ViewModels
    
             }
         }
+
+        public UserService UserService
+        {
+            get
+            {
+                return userService;
+            }
+
+            set
+            {
+                userService = value;
+            }
+        }
+
         public String Username
         {
             get
@@ -87,7 +100,7 @@ namespace Smart_Garden.ViewModels
 
 
 
-        private async void Login(object obj)
+        public async void Login(object obj)
         {
              
             User user = await userService.getUserByUsername(Username);
