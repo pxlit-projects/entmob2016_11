@@ -68,7 +68,7 @@ public class UserService implements IUserService {
         sender.sendMessage("Searched user with name : " + name + " at : " + LocalDateTime.now());
         return userRepository.findByusername(name);
     }
-
+    @Transactional
     public void updateUser(User user) {
         sender.sendMessage("Updated user with name : " + user.getUsername() + " at : " + LocalDateTime.now());
         User thisUser = userRepository.findByusername(user.getUsername());

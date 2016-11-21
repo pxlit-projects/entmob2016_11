@@ -78,7 +78,7 @@ public class CropIntegrationTest {
 // set headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String encoding = Base64.getEncoder().encodeToString("mkyong:123456".getBytes("UTF-8"));
+        String encoding = Base64.getEncoder().encodeToString("admin:admin".getBytes("UTF-8"));
         headers.set("Authorization", "Basic " + encoding);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
@@ -101,7 +101,7 @@ public class CropIntegrationTest {
 // set headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String encoding = Base64.getEncoder().encodeToString("mkyong:123456".getBytes("UTF-8"));
+        String encoding = Base64.getEncoder().encodeToString("admin:admin".getBytes("UTF-8"));
         headers.set("Authorization", "Basic " + encoding);
         HttpEntity<String> entity = new HttpEntity<>(jsonEntity, headers);
 
@@ -115,7 +115,7 @@ public class CropIntegrationTest {
         List<Crop> sCrops;
 
         URL url = new URL("http://localhost:9999/crop");
-        String encoding = Base64.getEncoder().encodeToString("mkyong:123456".getBytes("UTF-8"));
+        String encoding = Base64.getEncoder().encodeToString("admin:admin".getBytes("UTF-8"));
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");

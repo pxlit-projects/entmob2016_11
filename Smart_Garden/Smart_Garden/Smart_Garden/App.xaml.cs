@@ -21,7 +21,7 @@ namespace Smart_Garden
 
             NavigationPage navigation = new NavigationPage(new Login(adapter, ble)
             {
-                Title = "StrongPlate"
+                Title = "Login"
             });
             MainPage = navigation;
         }

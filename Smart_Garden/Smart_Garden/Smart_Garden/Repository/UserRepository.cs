@@ -25,7 +25,7 @@ namespace Smart_Garden.Repository
         public async Task<List<User>> getAllUsers()
         {
             List<User> users = null;
-            var baseUri = "http://192.168.0.191:9999/user";
+            var baseUri = "http://192.168.43.38:9999/user";
 
             String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)
@@ -50,7 +50,7 @@ namespace Smart_Garden.Repository
         public async Task<User> getUserByUsername(String username)
         {
             User user = null;
-            var baseUri = "http://192.168.0.191:9999/user/getByUsername/" + username;
+            var baseUri = "http://192.168.43.38:9999/user/getByUsername/" + username;
 
             String json = await JsonApiClientGetRequest(baseUri);
             if (json != null)
@@ -96,7 +96,7 @@ namespace Smart_Garden.Repository
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://192.168.0.191:9999/");
+                    client.BaseAddress = new Uri("http://192.168.43.38:9999/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Authorization = (new AuthenticationHeaderValue("Basic", val("admin", "admin")));
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
