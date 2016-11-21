@@ -3,7 +3,6 @@ using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Exceptions;
 using Smart_Garden.Models;
 using Smart_Garden.Pages;
-using Smart_Garden.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

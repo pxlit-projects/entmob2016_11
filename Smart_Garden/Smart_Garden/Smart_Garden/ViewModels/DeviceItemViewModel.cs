@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Smart_Garden.Utilities
+namespace Smart_Garden.ViewModels
 {
     public class DeviceItemViewModel
     {

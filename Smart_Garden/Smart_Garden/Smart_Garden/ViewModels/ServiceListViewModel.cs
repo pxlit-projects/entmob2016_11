@@ -1,7 +1,6 @@
 ﻿using Plugin.BLE.Abstractions.Contracts;
 using Smart_Garden.Models;
 using Smart_Garden.Services;
-using Smart_Garden.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,6 +46,13 @@ namespace Smart_Garden.ViewModels
                 GetServices();
             });
             MessagingCenter.Send("true", "senddevice");
+        }
+
+        //TestingPurpose
+        public ServiceListViewModel(User user, UserService userService)
+        {
+            this.user = user;
+            this.service = userService;
         }
         private async void GetServices()
         {
