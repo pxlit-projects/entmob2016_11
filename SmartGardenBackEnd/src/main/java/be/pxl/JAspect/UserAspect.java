@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-public class StrongPlateAspect {
+public class UserAspect {
     @Autowired
     private Sender sender;
 
