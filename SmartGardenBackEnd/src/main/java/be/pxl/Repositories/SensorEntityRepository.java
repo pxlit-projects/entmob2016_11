@@ -1,11 +1,8 @@
-package be.pxl.Repositories;
+package be.pxl.repositories;
 
-import be.pxl.Models.SensorEntity;
+import be.pxl.models.SensorEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by 11308157 on 7/10/2016.

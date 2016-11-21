@@ -1,7 +1,7 @@
-package be.pxl.Controllers;
+package be.pxl.controllers;
 
-import be.pxl.Models.SensorEntity;
-import be.pxl.Services.ISensorEntityService;
+import be.pxl.models.SensorEntity;
+import be.pxl.services.ISensorEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

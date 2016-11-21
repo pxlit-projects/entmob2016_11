@@ -1,9 +1,8 @@
-package be.pxl.Models;
+package be.pxl.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * Created by 11308157 on 14/10/2016.

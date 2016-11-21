@@ -1,20 +1,17 @@
-package be.pxl.Services;
+package be.pxl.services;
 
-import be.pxl.Logger.Sender;
-import be.pxl.Models.SensorEntity;
-import be.pxl.Models.User;
-import be.pxl.Models.UserRole;
-import be.pxl.Repositories.SensorEntityRepository;
-import be.pxl.Repositories.UserRepository;
-import be.pxl.Repositories.UserRoleRepository;
+import be.pxl.logger.Sender;
+import be.pxl.models.SensorEntity;
+import be.pxl.models.User;
+import be.pxl.models.UserRole;
+import be.pxl.repositories.SensorEntityRepository;
+import be.pxl.repositories.UserRepository;
+import be.pxl.repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.management.Sensor;
 
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by 11308157 on 7/10/2016.

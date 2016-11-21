@@ -1,15 +1,13 @@
-package be.pxl.Controllers;
+package be.pxl.controllers;
 
-import be.pxl.Models.User;
-import be.pxl.Services.IUserService;
-import be.pxl.Services.UserService;
+import be.pxl.models.User;
+import be.pxl.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Path;
 import java.util.Collection;
 
 /**

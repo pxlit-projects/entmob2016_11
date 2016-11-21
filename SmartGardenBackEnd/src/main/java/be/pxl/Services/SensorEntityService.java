@@ -1,14 +1,12 @@
-package be.pxl.Services;
+package be.pxl.services;
 
-import be.pxl.Logger.Sender;
-import be.pxl.Models.SensorEntity;
-import be.pxl.Repositories.SensorEntityRepository;
+import be.pxl.logger.Sender;
+import be.pxl.models.SensorEntity;
+import be.pxl.repositories.SensorEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by 11308157 on 7/10/2016.

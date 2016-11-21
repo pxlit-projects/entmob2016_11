@@ -1,4 +1,4 @@
-package be.pxl.Logger;
+package be.pxl.logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;

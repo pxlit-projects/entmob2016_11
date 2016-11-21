@@ -1,6 +1,6 @@
-package be.pxl.Repositories;
+package be.pxl.repositories;
 
-import be.pxl.Models.Crop;
+import be.pxl.models.Crop;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

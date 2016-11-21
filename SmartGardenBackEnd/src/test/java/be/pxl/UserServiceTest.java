@@ -1,11 +1,11 @@
 package be.pxl;
 
-import be.pxl.Logger.Sender;
-import be.pxl.Models.User;
-import be.pxl.Models.UserRole;
-import be.pxl.Repositories.UserRepository;
-import be.pxl.Repositories.UserRoleRepository;
-import be.pxl.Services.UserService;
+import be.pxl.logger.Sender;
+import be.pxl.models.User;
+import be.pxl.models.UserRole;
+import be.pxl.repositories.UserRepository;
+import be.pxl.repositories.UserRoleRepository;
+import be.pxl.services.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import org.springframework.dao.RecoverableDataAccessException;
-
 import java.util.*;
 
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

@@ -1,9 +1,9 @@
 package be.pxl;
 
-import be.pxl.Logger.Sender;
-import be.pxl.Models.Crop;
-import be.pxl.Repositories.CropRepository;
-import be.pxl.Services.CropService;
+import be.pxl.logger.Sender;
+import be.pxl.models.Crop;
+import be.pxl.repositories.CropRepository;
+import be.pxl.services.CropService;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package be.pxl.Repositories;
+package be.pxl.repositories;
 
-import be.pxl.Models.UserRole;
+import be.pxl.models.UserRole;
 import org.springframework.data.repository.CrudRepository;
 
 /**

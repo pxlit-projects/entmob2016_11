@@ -1,11 +1,9 @@
 package be.pxl;
 
-import be.pxl.Logger.Sender;
-import be.pxl.Models.SensorEntity;
-import be.pxl.Models.User;
-import be.pxl.Repositories.SensorEntityRepository;
-import be.pxl.Services.SensorEntityService;
-import be.pxl.Services.UserService;
+import be.pxl.logger.Sender;
+import be.pxl.models.SensorEntity;
+import be.pxl.repositories.SensorEntityRepository;
+import be.pxl.services.SensorEntityService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,16 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.dao.RecoverableDataAccessException;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.mockito.Matchers.anyInt;

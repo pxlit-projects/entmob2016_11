@@ -1,9 +1,9 @@
-package be.pxl.Services;
+package be.pxl.services;
 
 
-import be.pxl.Logger.Sender;
-import be.pxl.Models.Crop;
-import be.pxl.Repositories.CropRepository;
+import be.pxl.logger.Sender;
+import be.pxl.models.Crop;
+import be.pxl.repositories.CropRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

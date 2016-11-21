@@ -1,6 +1,6 @@
 package be.pxl;
 
-import be.pxl.Models.Crop;
+import be.pxl.models.Crop;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;

@@ -1,6 +1,6 @@
-package be.pxl.Services;
+package be.pxl.services;
 
-import be.pxl.Models.SensorEntity;
+import be.pxl.models.SensorEntity;
 
 /**
  * Created by 11308157 on 28/10/2016.

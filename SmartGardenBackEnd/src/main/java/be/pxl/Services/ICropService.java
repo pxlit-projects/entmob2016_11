@@ -1,6 +1,6 @@
-package be.pxl.Services;
+package be.pxl.services;
 
-import be.pxl.Models.Crop;
+import be.pxl.models.Crop;
 
 /**
  * Created by 11308157 on 28/10/2016.

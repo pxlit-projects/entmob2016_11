@@ -1,7 +1,7 @@
-package be.pxl.Repositories;
+package be.pxl.repositories;
 
 
-import be.pxl.Models.User;
+import be.pxl.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

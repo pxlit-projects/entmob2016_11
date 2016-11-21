@@ -1,4 +1,4 @@
-package be.pxl.Models;
+package be.pxl.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
